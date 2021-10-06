@@ -59,7 +59,7 @@ export default class Navitem extends React.Component {
                         </a>
                         {this.state.logIn && <Login handler={this.loginHandler} stateo={this.state.logIn} />}
                     </li>
-                )
+            )
         } else {
             return (
                 <li>
