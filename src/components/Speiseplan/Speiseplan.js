@@ -1,5 +1,6 @@
 import '../../index.css'
 import React, { useState, useEffect } from "react"
+import { useLocation } from 'react-router'
 import SpeiseplanService from "../../services/speiseplan.js"
 import moment from "moment"
 
@@ -20,7 +21,6 @@ const Speiseplan = props => {
             }
             )
     }
-
     return (
         <div className="container">
             <br />

@@ -11,6 +11,10 @@ function MyHeader() {
   if(old_url=="/"){
     old_url="Kantine"
   }
+  if(old_url){
+    old_url=old_url.replaceAll("/","")
+    old_url=old_url.charAt(0).toUpperCase() + old_url.slice(1)
+  }
   return (
     <Navbar>
       <Router>
