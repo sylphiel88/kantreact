@@ -121,7 +121,7 @@ export default class Login extends React.Component {
 
     handleClickOutside(event) {
         if (this.wrapperRef) {
-            if ((event.clientX < 710 || event.clientX > 1095 || event.clientY < 260 || event.clientY > 463) && (event.clientX<1800 && event.clientY>50)) {
+            if ((event.clientX < 710 || event.clientX > 1150 || event.clientY < 260 || event.clientY > 800) && (event.clientX<1800 && event.clientY>50)) {
                 this.changeOpen()
             }
         }
