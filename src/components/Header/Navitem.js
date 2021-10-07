@@ -17,8 +17,6 @@ export default class Navitem extends React.Component {
     }
 
     handler() {
-        const path = this.props.location;
-        console.log(path);
         this.setState({
             open: !this.state.open
         })

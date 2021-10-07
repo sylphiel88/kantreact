@@ -1,100 +1,23 @@
-import 'foundation-sites/dist/js/foundation'
-import { render } from 'react-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io'
-import { Redirect, Switch, BrowserRouter, Route, Router } from "react-router-dom";
-import Main from '../Main/Main';
-import Register from '../Register/Register';
-import Speiseplan from '../Speiseplan/Speiseplan';
-
-
-
-
-// function useOutsideAlerter(ref, url) {
-//     const [login, setLogin] = useState(true)
-//     useEffect(() => {
-//         function handleClickOutside(event) {
-//             if (event.clientX < 710 || event.clientX > 1095 || event.clientY < 260 || event.clientY > 463) {
-//                 setLogin(false)
-//                 console.log(url)
-//             }
-//         }
-//         // Bind the event listener
-//         document.addEventListener("mousedown", handleClickOutside);
-//         return () => {
-//             document.removeEventListener("mousedown", handleClickOutside);
-//         };
-//     }, [ref]);
-//     if (!login) {
-//         let url2 = window.location.href
-//         url2=url2.substr(url2.indexOf("?")+5)
-//         console.log(url2);
-//         document.getElementById('app').className="";
-//         document.getElementById('footer').className="";
-//         document.getElementById('login').className="noShow";
-//         render(
-//             <BrowserRouter>
-//                 <Switch>
-//                     <Redirect from='/login' push to={url2} />
-//                     <Route path='/speiseplan'>
-//                         <Speiseplan />
-//                     </Route>
-//                     <Route exact path='/'>
-//                         <Main />
-//                     </Route>
-//                     <Route path='/register'>
-//                         <Register />
-//                     </Route>
-//                 </Switch>
-//             </BrowserRouter>
-//             , document.getElementById('content')
-//         );
-//         setLogin(true)
-//     }
-// }
-
-
-
-// export default function Login(props) {
-//     const wrapperRef = useRef(null);
-//     let url = props.url
-//     useOutsideAlerter(wrapperRef, url);
-//     const [eye, setEye] = useState(false);
-//     let text
-//     if (!eye) {
-//         text = <div className="input-group "><input id='password' type="password" className="input-group-field inputl"></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => setEye(!eye)} /></div></div>
-//     } else {
-//         text = <div className="input-group"><input id='password' type="text" className="input-group-field inputl"></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => setEye(!eye)} /></div></div>
-//     }
-//     return (
-//         <div className="container">
-//             <div className="login-feld-signin" id="login-feld">
-//                 <div class="absolutf">
-//                     <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
-//                     <input id='username' type="text" className="inputl"></input>
-//                 </div>
-//                 <br /><br /><br />
-//                 <div class="absolutf">
-//                     <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
-//                     {text}
-//                 </div>
-//                 <br /><br /><br />
-//             </div>
-//         </div>
-//     )
-// }'
-
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import DropdownItem from './DropdownItem';
-import { IoIosAddCircleOutline, IoMdPizza } from "react-icons/io"
+import React from "react"
+import { IoIosArrowRoundForward, IoIosCheckmark } from "react-icons/io"
+import ReactTooltip from 'react-tooltip'
 
 export default class Login extends React.Component {
     constructor(props) {
         super(props)
         this.wrapperRef = React.createRef()
-        this.state = { open: true, eye: false }
+        this.state = { open: true, eye: false, eye2: false, signUp: false, username: "", password: "", antwort: "", email: "", passwordc: "", passwordtest: true, emailtest: true, msg: "" }
         this.setWrapperRef = this.setWrapperRef.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
+        // this.handleClickOutside = this.handleClickOutside.bind(this);
         this.setEye = this.setEye.bind(this)
+        this.setEye2 = this.setEye2.bind(this)
+        this.signUp = this.setSignUp.bind(this)
+        this.signIn = this.setSignIn.bind(this)
+        this.setPw = this.setPw.bind(this)
+        this.setPw2 = this.setPw2.bind(this)
+        this.setUn = this.setUn.bind(this)
+        this.setEm = this.setEm.bind(this)
     }
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
@@ -103,14 +26,130 @@ export default class Login extends React.Component {
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
-    setWrapperRef(node) {
+    async setWrapperRef(node) {
         this.wrapperRef = node;
     }
 
-    setEye() {
-        this.setState({ eye: !this.state.eye })
-
+    async setEye() {
+        await this.setState({ eye: !this.state.eye })
     }
+
+    async setEye2() {
+        await this.setState({ eye2: !this.state.eye2 })
+    }
+
+    async setPw(pw) {
+        var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+        if(!re.test(this.state.password)){
+            var noCo = true
+        } else {
+            var noCo = false
+        }
+        await this.setState({ password: pw, passwordtest: noCo })
+    }
+
+    async setPw2(pw) {
+        await this.setState({ passwordc: pw })
+    }
+
+    async setUn(un) {
+        await this.setState({ username: un })
+    }
+
+    async setEm(em) {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (!re.test(this.state.email)) {
+                await this.setState({emailtest: true})
+            } else {
+                await this.setState({emailtest: false})
+            }
+        await this.setState({ email: em })
+        
+    }
+
+    async setSignUp() {
+        if (this.state.signUp == false) {
+            await this.setState({ password: "", username: "",eye: false, eye2: false, signUp: !this.state.signUp})
+        } else {
+            if (this.state.username.length < 3) {
+                var noUn = true
+                console.log("Username must be 3 Chars or longer")
+            }
+            if (this.state.password.length < 3) {
+                var noPw = true
+                console.log("Password must be 3 Chars or longer")
+            }
+            if (this.state.passwordc.length < 3) {
+                var noPw2 = true
+                console.log("Password Confirm must be 3 Chars or longer")
+            }
+            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (!re.test(this.state.email)) {
+                var noEm = true
+                console.log("Not a valid email adress!")
+            }
+            re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+            if(!re.test(this.state.password)){
+                var noCo = true
+                console.log("Passwords be at least 8 chars long and must contain an uppercase letter, a number and a special Character")
+            }
+            if(this.state.password!=this.state.passwordc){
+                var noMa = true
+                console.log("Passwords are different")
+            }
+            if (!(noUn || noPw || noPw2 || noEm || noMa || noCo )) {
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: this.state.username,
+                        password: this.state.password,
+                        email: this.state.email
+                    })
+                };
+                await fetch('http://localhost:5000/api/v1/user/signup', requestOptions)
+                    .then(response => response.json())
+                    .then(data => this.setState({ msg: data.message }));
+                await this.setState({open: false})
+                await this.props.handler()
+            }
+        }
+    }
+
+
+    async setSignIn() {
+        if (this.state.signUp == true) {
+            this.setState({ signUp: !this.state.signUp, password: "", username: "",eye: false, eye2: false })
+        } else {
+            if (this.state.username.length < 3) {
+                var noUn = true
+                console.log("Username must be 3 Chars or longer")
+            }
+            if (this.state.password.length < 3) {
+                var noPw = true
+                console.log("Password must be 3 Chars or longer")
+            }
+            if (!(noUn || noPw)) {
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: this.state.username,
+                        password: this.state.password
+                    })
+                };
+                await fetch('http://localhost:5000/api/v1/user/signin', requestOptions)
+                    .then(response => response.json())
+                    .then(data => this.setState({ msg: data.message, login: data.login }));
+                alert(this.state.msg)
+                await this.setState({open: false})
+                await this.props.handler()
+            }
+        }
+    }
+
 
     changeOpen = () => {
         if (this.state.open == this.props.stateo) {
@@ -128,30 +167,67 @@ export default class Login extends React.Component {
     }
     render() {
         let text = "";
+        let button1 = "";
+        let button2 = "";
+        let email = "";
+        let pwconfirm = "";
+        let br="";
+        let classes ="";
         if (this.state.open == true) {
-            if (!this.state.eye) {
-                text = <div className="input-group "><input id='password' type="password" className="input-group-field inputl"></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => this.setEye()} /></div></div>
+            if (this.state.passwordtest){
+                classes="input-group-field inputl pwt"
             } else {
-                text = <div className="input-group"><input id='password' type="text" className="input-group-field inputl"></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye()} /></div></div>
+                classes="input-group-field inputl pwt2"
+            }
+            if (!this.state.eye) {
+                text = <div className="input-group "><input data-tip data-class="tt1" data-for="pass-tooltip" id='password' type="password" className={this.state.signUp?classes:"input-group-field inputl"} onChange={(event) => this.setPw(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => this.setEye()} /></div></div>
+            } else {
+                text = <div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={(event) => this.setPw(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye()} /></div></div>
+            }
+            if (this.state.signUp == false) {
+                button1 = <label id='signin' className="input-group-label inputb" onClick={() => this.signIn()}><IoIosCheckmark className="buttonicon"/>Sign In</label>
+                button2 = <label id='signup' className="input-group-label inputb2" onClick={() => this.signUp()}><IoIosArrowRoundForward className="buttonicon2"/>Sign Up</label>
+            } else {
+                button1 = <label id='signin' className="input-group-label inputb2" onClick={() => this.signIn()}><IoIosArrowRoundForward className="buttonicon2"/>Zurück</label>
+                button2 = <label id='signup' className="input-group-label inputb" onClick={() => this.signUp()}><IoIosCheckmark className="buttonicon"/>Sign Up</label>
+                email = <div>
+                            <div className={this.state.signUp?"absolutf":"absolutf2"}>
+                                <label for='email' style={{ color: "#f0f0f0" }}>Email: </label>
+                                <div data-tip data-class="tt" data-for="email-tooltip"><input id='email' type="text" className={this.state.emailtest?"inputl pwt":"inputl pwt2"} onChange={(event) => this.setEm(event.target.value)}></input></div>
+                            </div>
+                            <br /><br /><br />
+                        </div>
+                if (!this.state.eye2) {
+                    pwconfirm = <div className={this.state.signUp?"absolutf":"absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => this.setPw2(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => this.setEye2()} /></div></div></div>
+                } else {
+                    pwconfirm = <div className={this.state.signUp?"absolutf":"absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => this.setPw2(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye2()} /></div></div></div>
+                }
+                br=<span><br/><br/><br/></span>    
             }
             return (
-                <form method="Post" action="http://localhost:5000/api/v1/user">
-                    <div className="login-feld-signin" id="login-feld">
-                        <div class="absolutf">
-                            <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
-                            <input id='username' type="text" className="inputl"></input>
-                        </div>
-                        <br /><br /><br />
-                        <div class="absolutf">
-                            <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
-                            {text}
-                        </div>
-                        <br /><br /><br />
-                        <div class="absolutf">
-                            <div className="input-group"><label id='submit' type="sumbit" className="input-group-label inputb" value="Sign In">Signin</label><label id='submit' type="sumbit" className="input-group-label inputb" value="Sign Up">SignUp</label></div>
+                <div className={this.state.signUp?"login-feld-signup":"login-feld-signin"} id="login-feld">
+                    <div className={this.state.signUp?"absolutf":"absolutf2"}>
+                        <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
+                        <input id='username' type="text" className="inputl" onChange={(event) => this.setUn(event.target.value)}></input>
+                    </div>
+                    <br /><br /><br />
+                    {email}
+                    {this.state.signUp && this.state.emailtest?<ReactTooltip id="email-tooltip" >Keine Valide Email!</ReactTooltip>:""}
+                    <div className={this.state.signUp?"absolutf":"absolutf2"}>
+                        <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
+                        {text}
+                        {this.state.signUp && this.state.passwordtest?<ReactTooltip id="pass-tooltip" >Passwörter müssen verdichtet sein!</ReactTooltip>:""}
+                    </div>
+                    <br /><br /><br />
+                    {pwconfirm}
+                    {br}
+                    <div className={this.state.signUp?"absolutf":"absolutf2"}>
+                        <div className="input-group">
+                            {button1}
+                            {button2}
                         </div>
                     </div>
-                </form>
+                </div>
             )
         } else {
             // document.getElementById("app").className = "app"

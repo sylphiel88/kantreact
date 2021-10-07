@@ -8,7 +8,7 @@ export default class Dropdown extends React.Component {
         this.wrapperRef = React.createRef()
         this.state = {open:true}
         this.setWrapperRef = this.setWrapperRef.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
+        //this.handleClickOutside = this.handleClickOutside.bind(this);
     }
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
