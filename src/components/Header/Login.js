@@ -121,7 +121,7 @@ export default class Login extends React.Component {
 
     handleClickOutside(event) {
         if (this.wrapperRef) {
-            if ((event.clientX < 710 || event.clientX > 1150 || event.clientY < 260 || event.clientY > 800) && (event.clientX<1800 && event.clientY>50)) {
+            if ((event.clientX < 710 || event.clientX > 1150 || event.clientY < 260 || event.clientY > 800) && (event.clientX < 1800 && event.clientY > 50)) {
                 this.changeOpen()
             }
         }
@@ -135,18 +135,23 @@ export default class Login extends React.Component {
                 text = <div className="input-group"><input id='password' type="text" className="input-group-field inputl"></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye()} /></div></div>
             }
             return (
-                <div className="login-feld-signin" id="login-feld">
-                    <div class="absolutf">
-                        <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
-                        <input id='username' type="text" className="inputl"></input>
+                <form method="Post" action="http://localhost:5000/api/v1/user">
+                    <div className="login-feld-signin" id="login-feld">
+                        <div class="absolutf">
+                            <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
+                            <input id='username' type="text" className="inputl"></input>
+                        </div>
+                        <br /><br /><br />
+                        <div class="absolutf">
+                            <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
+                            {text}
+                        </div>
+                        <br /><br /><br />
+                        <div class="absolutf">
+                            <div className="input-group"><label id='submit' type="sumbit" className="input-group-label inputb" value="Sign In">Signin</label><label id='submit' type="sumbit" className="input-group-label inputb" value="Sign Up">SignUp</label></div>
+                        </div>
                     </div>
-                    <br /><br /><br />
-                    <div class="absolutf">
-                        <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
-                        {text}
-                    </div>
-                    <br /><br /><br />
-                </div>
+                </form>
             )
         } else {
             // document.getElementById("app").className = "app"

@@ -238,8 +238,8 @@ a {
 }
 
 @keyframes expandin {
-  0%    {filter: blur(5px); width:0vw; height:0vh;left:30vw;top: 19;opacity: 1;}
-  100%  {filter: blur(0px); width:20vw; height:22vh;left:40vw; top: 30vh;opacity: 1;} 
+  0%    {filter: blur(5px); width:0vw; height:0vh;left:30vw;top: 15vh;opacity: 1;}
+  100%  {filter: blur(0px); width:20vw; height:30vh;left:40vw; top: 30vh;opacity: 1;} 
 }
 
 @keyframes expandfields {
@@ -310,7 +310,15 @@ a {
   border: none;
 }
 
-.inputl:focus{
-  background-color: var(--bg-accent3);
+
+.inputb {
+  border-radius: 20px !important;
+  text-align: center;
+  background-color: var(--bg-accent);
   border: none;
+  color: #cfcfcf;
+  height: 5vh;
+  margin:5%;
+  padding-left:13%;
+  width: 40%;
 }
