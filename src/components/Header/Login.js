@@ -7,7 +7,21 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props)
         this.wrapperRef = React.createRef()
-        this.state = { open: true, eye: false, eye2: false, signUp: false, username: "", password: "", antwort: "", email: "", passwordc: "", passwordtest: true, emailtest: true, msg: "" }
+        this.state = {  open: true,
+                        eye: false,
+                        eye2: false,
+                        signUp: false,
+                        username: "",
+                        password: "",
+                        antwort: "",
+                        email: "",
+                        passwordc: "",
+                        passwordtest: true,
+                        emailtest: true,
+                        msg: "",
+                        signInloaded: false,
+                        token: ""
+                        }
         this.setWrapperRef = this.setWrapperRef.bind(this);
         // this.handleClickOutside = this.handleClickOutside.bind(this);
         this.setEye = this.setEye.bind(this)
@@ -70,7 +84,7 @@ export default class Login extends React.Component {
 
     async setSignUp() {
         if (this.state.signUp == false) {
-            await this.setState({ password: "", username: "",eye: false, eye2: false, signUp: !this.state.signUp})
+            await this.setState({ password: "", username: "",eye: false, eye2: false, signUp: !this.state.signUp, signInloaded: true})
         } else {
             if (this.state.username.length < 3) {
                 var noUn = true
@@ -104,14 +118,15 @@ export default class Login extends React.Component {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        username: this.state.username,
+                        username: this.state.username,  
                         password: this.state.password,
                         email: this.state.email
                     })
                 };
                 await fetch('http://localhost:5000/api/v1/user/signup', requestOptions)
                     .then(response => response.json())
-                    .then(data => this.setState({ msg: data.message }));
+                    .then(data => this.setState({ msg: data.message }))
+                alert(this.state.msg)
                 await this.setState({open: false})
                 await this.props.handler()
             }
@@ -121,7 +136,7 @@ export default class Login extends React.Component {
 
     async setSignIn() {
         if (this.state.signUp == true) {
-            this.setState({ signUp: !this.state.signUp, password: "", username: "",eye: false, eye2: false })
+            this.setState({ signUp: !this.state.signUp, password: "", username: "",eye: false, eye2: false})
         } else {
             if (this.state.username.length < 3) {
                 var noUn = true
@@ -142,7 +157,9 @@ export default class Login extends React.Component {
                 };
                 await fetch('http://localhost:5000/api/v1/user/signin', requestOptions)
                     .then(response => response.json())
-                    .then(data => this.setState({ msg: data.message, login: data.login }));
+                    .then(data => this.setState({ msg: data.message, token: data.token, login: data.login, un: data.user }));
+                console.log(this.state.token);
+                localStorage.setItem('token', this.state.token);
                 alert(this.state.msg)
                 await this.setState({open: false})
                 await this.props.handler()
@@ -204,8 +221,9 @@ export default class Login extends React.Component {
                 }
                 br=<span><br/><br/><br/></span>    
             }
+            let loginFeldClass=!this.state.signInloaded?"login-feld-signin":this.state.signUp?"login-feld-signup":"login-feld-signin-2";
             return (
-                <div className={this.state.signUp?"login-feld-signup":"login-feld-signin"} id="login-feld">
+                <div className={loginFeldClass} id="login-feld">
                     <div className={this.state.signUp?"absolutf":"absolutf2"}>
                         <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
                         <input id='username' type="text" className="inputl" onChange={(event) => this.setUn(event.target.value)}></input>

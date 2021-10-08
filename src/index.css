@@ -85,6 +85,7 @@ a {
   align-items: center;
   justify-content: center;
   transition: filter 300ms;
+  color: var(--text-color);
 }
 
 .icon-button:hover {
@@ -258,9 +259,14 @@ a {
 }
 
 @keyframes expandin2 {
-  0%    {filter: blur(5px); width:0vw; height:0vh;left:30vw;top: -2vh;opacity: 0.93;}
-  100%  {filter: blur(0px); width:20vw; height:44vh;left:40vw; top: 20vh;opacity: 0.93;} 
+  0%    {left:40vw;top: 30vh;width: 20vw;opacity: 0.93;}
+  100%  {height:44vh;left:40vw; top: 20vh;opacity: 0.93;} 
 }
+@keyframes expandin3 {
+  0%    {height:44vh;left:40vw; top: 20vh;opacity: 0.93;}
+  100%  {height:28vh;left:40vw; top: 30vh;opacity: 0.93;} 
+}
+
 
 .login-feld-signin{
   z-index: 1;
@@ -292,8 +298,8 @@ a {
   filter: blur(5px);
   left: 40vw;
   top: 30vh;
-  width: 0vw;
-  height:0vh;
+  width: 20vw;
+  height:28vh;
   padding: 2%;
   border: outset 4px var(--bg);
   animation-name: expandout;
@@ -305,19 +311,36 @@ a {
 
 .login-feld-signup{
   z-index: 1;
-  opacity: 0;
+  height:28vh;
+  left:40vw;
+  top: 30vh;
+  width: 20vw;
+  opacity: 0.93;
   position: absolute;
   background: var(--bg-accent2);
-  backdrop-filter:opacity(0.5);
   border: outset 4px var(--bg);
-  filter: blur(5px);
-  left: 40vw;
-  top: 30vh;
-  width: 0vw;
-  height:0vh;
   padding: 2%;
   border: outset 4px var(--bg);
   animation-name: expandin2;
+  animation-timing-function: linear;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.login-feld-signin-2{
+  z-index: 1;
+  height:44vh;
+  left:40vw;
+  top: 20vh;
+  width: 20vw;
+  opacity: 0.93;
+  position: absolute;
+  background: var(--bg-accent2);
+  border: outset 4px var(--bg);
+  padding: 2%;
+  border: outset 4px var(--bg);
+  animation-name: expandin3;
   animation-timing-function: linear;
   animation-duration: 0.5s;
   animation-delay: 0.5s;
@@ -413,8 +436,8 @@ a {
 }
 
 .tt {
-  top: 9vh !important;
-  left: 1vw !important;
+  top: 30vh !important;
+  left: auto !important;
 }
 .tt1 {
   top: -2vh !important;
