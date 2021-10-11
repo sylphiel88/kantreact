@@ -53,12 +53,13 @@ export default class Login extends React.Component {
     }
 
     async setPw(pw) {
-        var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
-        if(!re.test(this.state.password)){
-            var noCo = true
-        } else {
-            var noCo = false
-        }
+        var noCo = false
+        // var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+        // if(!re.test(this.state.password)){
+        //     var noCo = true
+        // } else {
+        //     var noCo = false
+        // }
         await this.setState({ password: pw, passwordtest: noCo })
     }
 
@@ -71,13 +72,13 @@ export default class Login extends React.Component {
     }
 
     async setEm(em) {
-        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-            if (!re.test(this.state.email)) {
-                await this.setState({emailtest: true})
-            } else {
-                await this.setState({emailtest: false})
-            }
+       // let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        this.setState({emailtest: false})
+            // if (!re.test(this.state.email)) {
+            //     await this.setState({emailtest: true})
+            // } else {
+            //     await this.setState({emailtest: false})
+            // }
         await this.setState({ email: em })
         
     }
@@ -98,17 +99,19 @@ export default class Login extends React.Component {
                 var noPw2 = true
                 console.log("Password Confirm must be 3 Chars or longer")
             }
-            let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let noCo = false
+            let noEm = false
+            // let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            if (!re.test(this.state.email)) {
-                var noEm = true
-                console.log("Not a valid email adress!")
-            }
-            re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
-            if(!re.test(this.state.password)){
-                var noCo = true
-                console.log("Passwords be at least 8 chars long and must contain an uppercase letter, a number and a special Character")
-            }
+            // if (!re.test(this.state.email)) {
+            //     var noEm = true
+            //     console.log("Not a valid email adress!")
+            // }
+            // re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+            // if(!re.test(this.state.password)){
+            //     var noCo = true
+            //     console.log("Passwords be at least 8 chars long and must contain an uppercase letter, a number and a special Character")
+            // }
             if(this.state.password!=this.state.passwordc){
                 var noMa = true
                 console.log("Passwords are different")
@@ -157,9 +160,8 @@ export default class Login extends React.Component {
                 };
                 await fetch('http://localhost:5000/api/v1/user/signin', requestOptions)
                     .then(response => response.json())
-                    .then(data => this.setState({ msg: data.message, token: data.token, login: data.login, un: data.user }));
-                console.log(this.state.token);
-                localStorage.setItem('token', this.state.token);
+                    .then(data => this.setState({ msg: data.message, token: data.authorization, login: data.login, un: data.user }));
+                localStorage.setItem('authorization', this.state.token);
                 alert(this.state.msg)
                 await this.setState({open: false})
                 await this.props.handler()

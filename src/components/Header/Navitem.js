@@ -1,14 +1,14 @@
 import React, { Component } from "react"
 import Dropdown from "./Dropdown"
 import Login from "./Login"
-import { IoLogoAngular } from "react-icons/io5";
+import { IoLogoAngular,IoPersonOutline } from "react-icons/io5";
 import axios from 'axios'
 import { responsiveFontSizes } from "@mui/material";
 
 export default class Navitem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { open: false, logIn: false, loggedIn: false }
+        this.state = { open: false, logIn: false, loggedIn: false, usergr:"", user:"" }
         this.handler = this.handler.bind(this)
         this.loginHandler = this.loginHandler.bind(this)
         this.logged = this.loggedHandler.bind(this)
@@ -29,7 +29,7 @@ export default class Navitem extends React.Component {
 
     logOutHandler(){
         this.setState({loggedIn: false})
-        localStorage.setItem('token',"")
+        localStorage.setItem('authorization',null)
     }
 
     loginHandler() {
@@ -54,13 +54,12 @@ export default class Navitem extends React.Component {
             document.getElementById("footer").className = ""
         }
         if (this.state.open && this.props.nummer == "1") {
-            console.log(this.state.open)
             this.setState({
                 open: !this.state.open
             })
         }
         if (this.props.nummer == "1") {
-            let token = localStorage.getItem('token')
+            let token = localStorage.getItem('authorization')
             if (!token) {
                 return (
                     <li>
@@ -73,24 +72,30 @@ export default class Navitem extends React.Component {
             } else {
                 axios.get('http://localhost:5000/api/v1/user/isLoggedIn', {
                     headers: {
-                        "x-access-token": token
+                        "authorization": token
                     }
                 })
                     .then(response => {
-                        if (!this.state.loggedIn) {
+                        if (!this.state.loggedIn && response.data.login) {
                             if(response.data.exp){
-                                this.setState({ loggedIn: false })
-                                
+                                this.setState({ loggedIn: false})
                             } else {
-                                this.setState({ loggedIn: true })
+                                this.setState({ loggedIn: true, user: response.data.dec  })
                             }
                         }
-                    })
+                        axios.get('http://localhost:5000/api/v1/user/usergroup',{
+                            headers: {
+                                "user": response.data.dec
+                            }
+                        }).then(response =>{
+                            this.setState({usergr: response.data.ug})
+                        })
+                    })                
                 if (this.state.loggedIn) {
                     return (
                         <li>
-                            <a href="#" className="icon-button" onClick={this.logOutHandler}>
-                            <IoLogoAngular />
+                            <a href="#" className="icon-button" onClick={this.logOutHandler} title={this.state.user}>
+                            {this.state.usergr=="Administrator"?<IoLogoAngular />:this.state.usergr="Dozent"?<IoPersonOutline/>:""}
                             </a>
                         </li>
                     )
