@@ -129,7 +129,6 @@ export default class Login extends React.Component {
                 await fetch('http://localhost:5000/api/v1/user/signup', requestOptions)
                     .then(response => response.json())
                     .then(data => this.setState({ msg: data.message }))
-                alert(this.state.msg)
                 await this.setState({open: false})
                 await this.props.handler()
             }
@@ -162,9 +161,9 @@ export default class Login extends React.Component {
                     .then(response => response.json())
                     .then(data => this.setState({ msg: data.message, token: data.authorization, login: data.login, un: data.user }));
                 localStorage.setItem('authorization', this.state.token);
-                alert(this.state.msg)
                 await this.setState({open: false})
                 await this.props.handler()
+                window.location.href="/"
             }
         }
     }
@@ -204,10 +203,10 @@ export default class Login extends React.Component {
                 text = <div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={(event) => this.setPw(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye()} /></div></div>
             }
             if (this.state.signUp == false) {
-                button1 = <label id='signin' className="input-group-label inputb" onClick={() => this.signIn()}><IoIosCheckmark className="buttonicon"/>Sign In</label>
+                button1 = <label id='signin' className="input-group-label inputb" onClick={() => this.signIn()}><a href="#"><IoIosCheckmark className="buttonicon"/></a>Sign In</label>
                 button2 = <label id='signup' className="input-group-label inputb2" onClick={() => this.signUp()}><IoIosArrowRoundForward className="buttonicon2"/>Sign Up</label>
             } else {
-                button1 = <label id='signin' className="input-group-label inputb2" onClick={() => this.signIn()}><IoIosArrowRoundForward className="buttonicon2"/>Zurück</label>
+                button1 = <label id='signin' className="input-group-label inputb2" onClick={() => this.signIn()}><a href="#"><IoIosArrowRoundForward className="buttonicon2"/></a>Zurück</label>
                 button2 = <label id='signup' className="input-group-label inputb" onClick={() => this.signUp()}><IoIosCheckmark className="buttonicon"/>Sign Up</label>
                 email = <div>
                             <div className={this.state.signUp?"absolutf":"absolutf2"}>

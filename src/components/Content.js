@@ -5,6 +5,7 @@ import Register from './Register/Register'
 import Main from './Main/Main'
 import history from '../history';
 
+
 function Content() {
     let old_url
     let ret

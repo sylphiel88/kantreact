@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import { IoConstructOutline } from "react-icons/io5";
+import Administrator from "./Administrator"
+import Dozent from "./Dozent"
 
 function useLocalStorage(key) {
     const [value, setValue] = useState(() => {
@@ -52,10 +53,12 @@ function Main({prop}) {
             })
 
         let ret
-        if (loggedIn) {
-            ret = <h1>Hallo {user} der Nutzergruppe {usergr}</h1>
+        if(usergr === "Administrator"){
+            ret=<Administrator />
+        } else if(usergr==="Dozent"){
+            ret=<Dozent/>
         } else {
-            ret = <h1>Hallo Unbekannter</h1>
+            ret=""
         }
         return ret
     }

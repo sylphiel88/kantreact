@@ -3,9 +3,8 @@ import Dropdown from "./Dropdown"
 import Login from "./Login"
 import { IoLogoAngular,IoPersonOutline } from "react-icons/io5";
 import axios from 'axios'
-import { responsiveFontSizes } from "@mui/material";
 
-export default class Navitem extends React.Component {
+export default class Navitem extends Component {
     constructor(props) {
         super(props)
         this.state = { open: false, logIn: false, loggedIn: false, usergr:"", user:"" }
@@ -28,8 +27,9 @@ export default class Navitem extends React.Component {
     }
 
     logOutHandler(){
-        this.setState({loggedIn: false})
+        this.setState({loggedIn: false, login: false, user:"", usergr:""})
         localStorage.setItem('authorization',null)
+        window.location.href="/"
     }
 
     loginHandler() {
@@ -95,7 +95,8 @@ export default class Navitem extends React.Component {
                     return (
                         <li>
                             <a href="#" className="icon-button" onClick={this.logOutHandler} title={this.state.user}>
-                            {this.state.usergr=="Administrator"?<IoLogoAngular />:this.state.usergr="Dozent"?<IoPersonOutline/>:""}
+                            {this.state.usergr==="Administrator"?<IoLogoAngular />:""}
+                            {this.state.usergr==="Dozent"?<IoPersonOutline/>:""}
                             </a>
                         </li>
                     )

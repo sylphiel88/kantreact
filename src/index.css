@@ -7,6 +7,12 @@ body {
   background: #c0e1ff7a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+  background-image: url('Image/titelblatt.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .noShow{
@@ -27,7 +33,7 @@ a:hover {
   --bg-accent: #3a5379c0;
   --bg-accent2: #91a6c5;
   --bg-accent3: #becce2e5;
-  --text-color: #dadce1;
+  --text-color: rgb(255, 251, 224);
   --nav-size: 60px;
   --border: 2px solid #0f2b47;
   --border-radius: 8px;
@@ -449,4 +455,167 @@ a {
 
 .pwt2 {
   border-color:lightgreen !important;
+}
+
+.zeile {
+  display: flex;
+  height:40vh;
+  width: 81vw;
+  float: left;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
+
+
+.spalte1 {
+  position: absolute;
+  display: flex;
+  top: 4vh;
+  left: 10vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+}
+.spalte2 {
+  position: absolute;
+  display: flex;
+  top: 4vh;
+  left: 37.3vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.spalte3 {
+  position: absolute;
+  display: flex;
+  top: 4vh;
+  left: 64.6vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.spalte4 {
+  position: absolute;
+  display: flex;
+  top: 45vh;
+  left: 10vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.spalte5 {
+  position: absolute;
+  display: flex;
+  top: 45vh;
+  left: 37.3vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+.spalte6 {
+  position: absolute;
+  display: flex;
+  top: 45vh;
+  left: 64.6vw;
+  border-radius: 25px;
+  height: 40vh;
+  opacity: 0.6;
+  width: 27vw;
+  float: left;
+  background-color: #081f41;
+  margin: 2px;
+  font-size: 20pt;
+  color: var(--text-color);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+@keyframes spalte {
+  100% {height: 81.6vh; width:81.6vw; top: 4vh; left: 10vw; opacity: 0.93;}
+}
+
+.spalte_anim{
+  position: absolute;
+  z-index: 1 !important;
+  animation-name: spalte;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes closebut {
+  100% {opacity: 0.93;}
+}
+
+.close{
+  z-index: 2 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  border-radius: 25px;
+  top:4.2vh;
+  left: 89.5vw;
+  width: 2vw;
+  height: 2vw;
+  opacity: 0;
+  color: var(--text-color);
+  background-color: #3a5b83;
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.5s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
