@@ -26,7 +26,6 @@ function UserC({ props }) {
     return(
         <div>
             <UserList/>
-            {pages}
             <input type="button" class="userSend" id="us" value="Absenden"></input>
         </div>
     )
