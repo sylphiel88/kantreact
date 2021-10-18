@@ -3,24 +3,30 @@ import UserC from "./userC"
 
 function Administrator({ props }) {
     const [curPage, setCurPage] = useState(0)
+    const [closingState, setClosingState] = useState(false)
+
+    useEffect(()=>{
+        if(curPage>0){
+            setClosingState(true)
+            setTimeout(()=>{var spalte = "spalte"+curPage;var id = "s" + curPage;document.getElementById(id).classList.replace(spalte,"spalte_big");setClosingState(false)},1000)
+        }
+    },[curPage])
 
     const closeHandler = async () => {
         var id = "s" + curPage;
         var anim = "spalte_anim" + curPage;
-        var spalte = "spalte"+curPage
-        document.getElementById(id).classList.replace(spalte,"spalte_big");
         document.getElementById(id).classList.replace("spalte_anim",anim);
         if(curPage===1){
             document.getElementById("us").classList.replace("userSend","userSend2");
         }
-        console.log(id, anim,document.getElementById(id).classList);
-        setTimeout(() => setCurPage(0), 1000);
+        setClosingState(true)
+        setTimeout(() => {setCurPage(0);setClosingState(false)}, 1001);
     }
 
     return (
         <div>
             <div className="zeile" style={{ marginTop: "5vh" }}>
-                <div id="s1" className={curPage === 1 ? "spalte1 spalte_anim" : "spalte1"} onClick={() => setCurPage(1)}>{curPage===1?<UserC/>:"User-Kontrollzentrum"}</div>
+                <div id="s1" className={curPage === 1 ? "spalte1 spalte_anim" : "spalte1"} onClick={() => setCurPage(1)}>{curPage===1?<UserC close={closingState}/>:"User-Kontrollzentrum"}</div>
                 <div id="s2" className={curPage === 2 ? "spalte2 spalte_anim" : "spalte2"} onClick={() => setCurPage(2)}>b</div>
                 <div id="s3" className={curPage === 3 ? "spalte3 spalte_anim" : "spalte3"} onClick={() => setCurPage(3)}>c</div>
             </div>

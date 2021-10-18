@@ -229,7 +229,7 @@ a {
 .blur{
   filter:blur(5px);
   animation-name: blur;
-  animation-duration: 2s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
@@ -241,7 +241,7 @@ a {
     width:100vw;
     bottom:0;
     animation-name: blur;
-    animation-duration: 2s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
 }
@@ -485,14 +485,14 @@ a {
   background-color: #081f41;
   margin: 2px;
   font-size: 20pt;
-  color: var(--text-color2);
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  color: var(--text-color2);
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 2s;
+  animation-duration: 1s;
 
 }
 .spalte2 {
@@ -516,7 +516,7 @@ a {
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5;
+  animation-duration: 1s;
 
 }
 .spalte3 {
@@ -539,12 +539,7 @@ a {
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5;
-  animation-name: textopac;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  animation-duration: 0.5;
-
+  animation-duration: 1s;
 }
 
 .spalte4 {
@@ -567,7 +562,7 @@ a {
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5;
+  animation-duration: 1s;
 
 }
 .spalte5 {
@@ -590,7 +585,7 @@ a {
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5;
+  animation-duration: 1s;
 
 }
 .spalte6 {
@@ -613,35 +608,35 @@ a {
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5;
+  animation-duration: 1s;
 }
 
 @keyframes spalte {
-  100% {height: 81vh; width:81.6vw; top: 4vh; left: 10vw; opacity: 0.93; box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);background-color: #081f41;color:var(--text-color);}
+  100% {height: 81vh; width:81.6vw; top: 4vh; left: 10vw; opacity: 0.93; box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);background-color: #081f41;color:var(--text-color); border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte1 {
-  100% {color: var(--text-color2); height: 40vh; width:27vw; top: 4vh; left: 10vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;padding-right: 0;padding-bottom: 0;}
+  100% {color: var(--text-color2); height: 40vh; width:27vw; top: 4vh; left: 10vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;padding-right: 0;padding-bottom: 0;border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte2 {
-  100% {height: 40vh; width:27vw; top: 4vh; left: 37.3vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;}
+  100% {height: 40vh; width:27vw; top: 4vh; left: 37.3vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte3 {
-  100% {height: 40vh; width:27vw; top: 4vh; left: 64.6vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;}
+  100% {height: 40vh; width:27vw; top: 4vh; left: 64.6vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte4 {
-  100% {height: 40vh; width:27vw; top: 45vh; left: 10vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;}
+  100% {height: 40vh; width:27vw; top: 45vh; left: 10vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41; border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte5 {
-  100% {height: 40vh; width:27vw; top: 45vh; left: 37.3vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;}
+  100% {height: 40vh; width:27vw; top: 45vh; left: 37.3vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;border: 2px inset var(--bg-accent2);}
 }
 
 @keyframes spalte6 {
-  100% {height: 40vh; width:27vw; top: 45vh; left: 64.6vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;}
+  100% {height: 40vh; width:27vw; top: 45vh; left: 64.6vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41; border: 2px inset var(--bg-accent2);}
 }
 
 .spalte_anim{
@@ -712,17 +707,17 @@ a {
   height: 81vh; 
   width:81.6vw; 
   top: 4vh; 
-  left: 10vw; 
+  left: 10vw;
   opacity: 0.93;
   border-radius: 25px;
-  margin: 2px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
   font-size: 20pt;
   color: var(--text-color);
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
   box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
   background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
 }
 
 @keyframes closebut {
@@ -746,26 +741,53 @@ a {
   background-color: #3a5b83;
   animation-name: closebut;
   animation-timing-function: linear;
-  animation-duration: 0.5s;
-  animation-delay: 1s;
+  animation-duration: 0.2s;
   animation-fill-mode: forwards;
+  border: 2px inset var(--bg-accent2);
 }
 
-.carduser {
+.carduser9 {
   display: flex;
-  width: 32%;
-  height: 20vh !important;
+  width: 25vw;
+  height: 20vh;
   float: left;
   margin: 5px;
+  padding: 0;
+  opacity: 0;
   background-color: var(--bg-accent);
   color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
   border: none;
+}
+
+.carduser16 {
+  display: flex;
+  width: 19vw;
+  height: 15vh;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  border: none;
+
 }
 
 .carduserT {
   background-color: var(--bg-accent2);
   color: var(--text-color);
   border: none;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .chkuser {
@@ -774,10 +796,9 @@ a {
 }
 
 .chkuser2{
-  margin-top: 60px;
   transform: scale(1.5);
   filter: hue-rotate(25deg);
-  filter: saturate(0.5)
+  filter: saturate(0.5);
 }
 
 .input[type="checkbox"] + span{
@@ -794,29 +815,141 @@ a {
 
 .userSend {
   position: absolute;
-  top:750px;
-  left:720px;
+  top:740px;
+  left:712px;
   color: var(--text-color);
   background-color: var(--bg-accent);
+  border-radius: 15px;
+  border: 2px inset var(--bg-accent2);
   padding: 15px;
   opacity: 0;
   animation-name: sendButton;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5s;
-  animation-delay: 2s;
+  animation-duration: 0.2s;
 }
 
 .userSend2 {
   position: absolute;
-  top:750px;
-  left:720px;
+  top:740px;
+  left:712px;
   color: var(--text-color);
   background-color: var(--bg-accent);
+  border: 2px inset var(--bg-accent2);
   padding: 15px;
   opacity: 1;
   animation-name: sendButton2;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-duration: 0.5s;
+  animation-duration: 0.2s;
+}
+
+.pagesForw{
+  position: absolute;
+  top:30px;
+  left:822px;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  border: none;
+  animation-name: sendButton;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.pagesBackw{
+  position: absolute;
+  top:30px;
+  left:722px;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  border: none;
+  color: var(--text-color);
+  animation-name: sendButton;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.pages{
+  position: absolute;
+  top:25px;
+  left:764px;
+  color: var(--text-color);
+  font-size: 20pt;
+  opacity: 0;
+  animation-name: sendButton;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.InfoModal{
+  z-index: 100;
+  position: absolute;
+  top:20px;
+  left:600px;
+  width: 300px;
+  height: fit-content;
+  opacity: 0.93;
+  color: var(--text-color);
+  background-color: var(--bg-accent2);
+  font-size: 14pt;
+  border-radius: 10px;
+  border: 2px inset var(--bg-accent);
+  outline: 3px inset var(--bg-accent2);
+  box-shadow: 10px 10px 15px black;
+  padding: 10px;
+}
+
+.card {
+  border-radius: 10px;
+  border: 2px inset var(--bg-accent);
+  outline: 3px inset var(--bg-accent2);
+}
+
+.card-section {
+  display: flex;
+  border-radius: 10px;
+  border: 2px outset var(--bg-accent);
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.selector {
+  appearance: text("<");
+  float:left !important;
+  width:20vw;
+  margin-top:-55px;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  border-radius: 15px;
+  border: 2px inset var(--bg-accent); 
+  opacity: 0;
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s; 
+  animation-fill-mode: forwards;
+}
+
+.selector:focus {
+  float:left !important;
+  width:20vw;
+  margin-top:-55px;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  border-radius: 15px;
+  border: 2px inset var(--bg-accent);
+}
+
+.selector:focus-within{
+    float:left !important;
+    width:20vw;
+    margin-top:-55px;
+    background-color: var(--bg-accent);
+    color: var(--text-color);
+    border-radius: 15px;
+    border: 2px inset var(--bg-accent);
 }

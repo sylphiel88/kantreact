@@ -38,6 +38,7 @@ function Main({prop}) {
                 if (!loggedIn && response.data.login) {
                     if (response.data.exp) {
                         setLogin(false)
+                        window.location.href='/'
                     } else {
                         setLogin(true)
                         setUser(response.data.dec)
