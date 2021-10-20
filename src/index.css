@@ -81,7 +81,7 @@ a {
 
 /* Icon Button */
 .icon-button {
-  --button-size: calc(var(--nav-size) * 0.5);
+  --button-size: calc(var(--nav-size) * 0.75);
   width: var(--button-size);
   height: var(--button-size);
   background-color: #081f41;
@@ -101,8 +101,8 @@ a {
 
 .icon-button svg { 
   fill: var(--text-color);
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .apptitle {
@@ -215,7 +215,7 @@ a {
 .vollkost {
   float: left;
   width: 30%;
-  margin-left: 30%;
+  margin-left: 25%;
 }
 .vegetarisch {
   float: right;
@@ -473,6 +473,7 @@ a {
 }
 
 .spalte1 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 4vh;
@@ -493,9 +494,10 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
-
+  border: 10px outset #00122b;
 }
 .spalte2 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 4vh;
@@ -512,14 +514,16 @@ a {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  
+  border: 10px outset #00122b;
   animation-name: textopac;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+
 
 }
 .spalte3 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 4vh;
@@ -540,9 +544,11 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  border: 10px outset #00122b;
 }
 
 .spalte4 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 45vh;
@@ -563,9 +569,11 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  border: 10px outset #00122b;
 
 }
 .spalte5 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 45vh;
@@ -586,9 +594,11 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  border: 10px outset #00122b;
 
 }
 .spalte6 {
+  z-index: 0;
   position: absolute;
   display: flex;
   top: 45vh;
@@ -609,6 +619,7 @@ a {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  border: 10px outset #00122b;
 }
 
 @keyframes spalte {
@@ -650,16 +661,17 @@ a {
 
 .spalte_anim1{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte1;
   animation-timing-function: linear;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
+
 .spalte_anim2{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte2;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -668,7 +680,7 @@ a {
 
 .spalte_anim3{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte3;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -677,7 +689,7 @@ a {
 
 .spalte_anim4{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte4;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -686,7 +698,7 @@ a {
 
 .spalte_anim5{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte5;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -695,7 +707,7 @@ a {
 
 .spalte_anim6{
   position: absolute;
-  z-index: 0 !important;
+  z-index: 1 !important;
   animation-name: spalte6;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -703,7 +715,11 @@ a {
 }
 
 .spalte_big{
+  z-index: 1 !important;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   height: 81vh; 
   width:81.6vw; 
   top: 4vh; 
@@ -725,7 +741,7 @@ a {
 }
 
 .close{
-  z-index: 2 !important;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -742,13 +758,48 @@ a {
   animation-name: closebut;
   animation-timing-function: linear;
   animation-duration: 0.2s;
+  animation-delay: 1.5s;
   animation-fill-mode: forwards;
   border: 2px inset var(--bg-accent2);
+}
+
+.carduser4 {
+  display: flex;
+  width: 37.5vw;
+  height: 30vh;
+  float: left;
+  margin: 5px;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  border: none;
+  font-size: 20pt;
 }
 
 .carduser9 {
   display: flex;
   width: 25vw;
+  height: 20vh;
+  float: left;
+  margin: 5px;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  border: none;
+  font-size: 20pt;
+}
+
+.carduser12 {
+  display: flex;
+  width: 19vw;
   height: 20vh;
   float: left;
   margin: 5px;
@@ -766,7 +817,7 @@ a {
 .carduser16 {
   display: flex;
   width: 19vw;
-  height: 15vh;
+  height: 14.5vh;
   float: left;
   margin: 5px;
   padding: 0;
@@ -778,7 +829,28 @@ a {
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
   border: none;
+}
 
+.carduser20 {
+  display: flex;
+  width: 15.2vw;
+  height: 14.5vh;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  border: none;
+  font-size: 17pt;
+}
+
+.userlist {
+  margin-bottom: 70vh !important;
 }
 
 .carduserT {
@@ -845,12 +917,14 @@ a {
 }
 
 .pagesForw{
+  z-index: 2;
   position: absolute;
   top:30px;
   left:822px;
   opacity: 0;
   background-color: var(--bg-accent);
   color: var(--text-color);
+  border-radius: 15px;
   border: none;
   animation-name: sendButton;
   animation-timing-function: linear;
@@ -859,11 +933,13 @@ a {
 }
 
 .pagesBackw{
+  z-index: 2;
   position: absolute;
   top:30px;
   left:722px;
   opacity: 0;
   background-color: var(--bg-accent);
+  border-radius: 15px;
   border: none;
   color: var(--text-color);
   animation-name: sendButton;
@@ -903,13 +979,13 @@ a {
   padding: 10px;
 }
 
-.card {
+.cardUL {
   border-radius: 10px;
   border: 2px inset var(--bg-accent);
   outline: 3px inset var(--bg-accent2);
 }
 
-.card-section {
+.card-sectionUL {
   display: flex;
   border-radius: 10px;
   border: 2px outset var(--bg-accent);
@@ -919,10 +995,10 @@ a {
 }
 
 .selector {
-  appearance: text("<");
-  float:left !important;
-  width:20vw;
-  margin-top:-55px;
+  position: absolute !important;
+  top: 30px !important;
+  left:40px !important;
+  width:200px;
   background-color: var(--bg-accent);
   color: var(--text-color);
   border-radius: 15px;
@@ -932,9 +1008,10 @@ a {
   animation-timing-function: linear;
   animation-duration: 0.2s; 
   animation-fill-mode: forwards;
+
 }
 
-.selector:focus {
+/* .selector:focus {
   float:left !important;
   width:20vw;
   margin-top:-55px;
@@ -942,14 +1019,88 @@ a {
   color: var(--text-color);
   border-radius: 15px;
   border: 2px inset var(--bg-accent);
-}
+} */
 
 .selector:focus-within{
-    float:left !important;
-    width:20vw;
-    margin-top:-55px;
     background-color: var(--bg-accent);
     color: var(--text-color);
     border-radius: 15px;
     border: 2px inset var(--bg-accent);
+}
+
+.flex-center-div{
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.allUsersChkb {
+  margin-left: 10px;
+  margin-bottom: -2px;
+  transform: scale(1.5);
+  filter: hue-rotate(25deg);
+  filter: saturate(0.5);
+}
+
+.allUsersT {
+  float: left;
+  font-size: 14pt;
+}
+
+.cardVK{
+  border: 2px outset #DB8179;
+  border-radius: 10px;
+  background-color: #bb4d4383;
+  margin-top:-15px !important;
+  color: #FFFBE0FF;
+  height: 160px;
+  width: 300px;
+}
+.cardVG{
+  border: 2px outset #65e7a2;
+  border-radius: 10px;
+  background-color: #20744783;
+  margin-top:-15px !important;
+  color: #FFFBE0FF;
+  height: 160px;
+  width: 300px;
+}
+
+.titelVK{
+  width:107%;
+  background-color:#bb4d4383;
+  border-radius: 10px;
+  border: 2px outset #DB8179;
+  margin-bottom:15px;
+  text-align: center;
+  color:var(--text-color);
+}
+
+.titelVG {
+  width:107%;
+  background-color:#20744783;
+  border-radius: 10px;
+  border: 2px outset #65e7a2;
+  margin-bottom:15px;
+  text-align: center;
+  color:var(--text-color);
+}
+
+.spText{
+  opacity: 1 !important;
+}
+
+.dateSpVK {
+  background-color: #7a2c25a0;
+  height: 10px;
+  padding-top: 2px;
+  font-size: 10pt;
+}
+
+.dateSpVG {
+  background-color: #1a5737a0;
+  height: 10px;
+  padding-top: 2px;
+  font-size: 10pt;
 }

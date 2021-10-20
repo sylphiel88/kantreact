@@ -8,7 +8,9 @@ function Administrator({ props }) {
     useEffect(()=>{
         if(curPage>0){
             setClosingState(true)
-            setTimeout(()=>{var spalte = "spalte"+curPage;var id = "s" + curPage;document.getElementById(id).classList.replace(spalte,"spalte_big");setClosingState(false)},1000)
+            var id = "s" + curPage;
+            document.getElementById(id).classList.add("flex-center-div");
+            setTimeout(()=>{var spalte = "spalte"+curPage;var id = "s" + curPage;document.getElementById(id).classList.replace(spalte,"spalte_big");document.getElementById(id).classList.remove("flex-center-div");setClosingState(false)},1000)
         }
     },[curPage])
 
@@ -35,7 +37,7 @@ function Administrator({ props }) {
                 <div id="s5" className={curPage === 5 ? "spalte5 spalte_anim" : "spalte5"} onClick={() => setCurPage(5)}>e</div>
                 <div id="s6" className={curPage === 6 ? "spalte6 spalte_anim" : "spalte6"} onClick={() => setCurPage(6)}>f</div>
             </div>
-            {curPage != 0 ? <div class="close" onClick={() => closeHandler()}>X</div> : ""}
+            {curPage != 0 && !closingState ? <div class="close" onClick={() => closeHandler()}>X</div> : ""}
         </div>
     )
 }

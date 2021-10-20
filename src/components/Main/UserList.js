@@ -9,6 +9,7 @@ function UserList(props) {
     const [page, setPage] = useState(1)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalText, setModalText] = useState("")
+    const [chkdList, chkdListChg] = useState([])
 
     if (props.page != page) {
         setPage(props.page)
