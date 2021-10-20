@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import UserC from "./userC"
+import UserC from "./UserC"
 
 function Administrator({ props }) {
     const [curPage, setCurPage] = useState(0)
