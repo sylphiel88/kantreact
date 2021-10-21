@@ -85,6 +85,7 @@ a {
   width: var(--button-size);
   height: var(--button-size);
   background-color: #081f41;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.49);
   border-radius: 50%;
   padding: 5px;
   margin: 2px;
@@ -111,6 +112,7 @@ a {
   justify-content: center;
   font-weight: bolder;
   font-size: 20pt;
+  text-shadow: -1px -1px 10px rgb(0, 0, 0), 1px 1px 10px black;
   color: var(--text-color);
 }
 
@@ -128,6 +130,7 @@ a {
   width:100vw;
   padding-left: 10%;
   bottom:0;
+  text-shadow: -1px -1px 10px rgb(0, 0, 0), 1px 1px 10px black;
 }
 
 .footer1 {
@@ -1103,4 +1106,68 @@ a {
   height: 10px;
   padding-top: 2px;
   font-size: 10pt;
+}
+
+.soupStyle{
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+.speisePlanPanelVG{
+  float: left;
+  width: 30vw;
+  height: 20vh;
+  margin-left:2vw;
+}
+
+.speisePlanPanelVK {
+  float: left;
+  width: 30vw;
+  height: 20vh;
+  margin-left:8vw;
+}
+
+.tagSpeisePlan {
+  margin-top: -15vh;
+  margin-bottom: 25vh;
+  text-align: center;
+}
+
+.daysForw{
+  z-index: 2;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  border-radius: 15px;
+  border: none;
+  animation-name: sendButton;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.daysBackw{
+  z-index: 2;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  border-radius: 15px;
+  border: none;
+  color: var(--text-color);
+  animation-name: sendButton;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.chgMealVK{
+  width:28.5vw !important;
+  background-color: #FFFFFF00 !important;
+  color: var(--text-color) !important;
+  outline-width: 0 !important;
+  outline: none !important;
+  border: 0 !important;
+  border:none !important;
+  box-shadow: none !important;
+  text-align: center;
+  font-size: 18pt;
 }
