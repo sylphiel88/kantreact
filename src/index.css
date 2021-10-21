@@ -1160,6 +1160,7 @@ a {
 }
 
 .chgMealVK{
+  height: auto;
   width:28.5vw !important;
   background-color: #FFFFFF00 !important;
   color: var(--text-color) !important;
@@ -1170,4 +1171,65 @@ a {
   box-shadow: none !important;
   text-align: center;
   font-size: 18pt;
+}
+
+.chgSVK{
+  display: inline;
+  width: 80%;
+  white-space:nowrap;
+  height: 0;
+  background-color: #FFFFFF00 !important;
+  color: var(--text-color) !important;
+  outline-width: 0 !important;
+  outline: none !important;
+  border: 0 !important;
+  border:none !important;
+  box-shadow: none !important;
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+
+.chgD{
+  display: inline !important;
+  width: 80%;
+  height: 10pt;
+  background-color: #FFFFFF00 !important;
+  color: var(--text-color) !important;
+  outline-width: 0 !important;
+  outline: none !important;
+  border: 0 !important;
+  border:none !important;
+  box-shadow: none !important;
+  font-size: 10pt;
+  font-weight: lighter;
+}
+
+.chgMealVG{
+  height: auto;
+  width: 80%;
+  background-color: #FFFFFF00 !important;
+  color: var(--text-color) !important;
+  outline-width: 0 !important;
+  outline: none !important;
+  border: 0 !important;
+  border:none !important;
+  box-shadow: none !important;
+  font-size: 18pt;
+}
+
+.chgSVG{
+  display: inline;
+  width: 80%;
+  white-space:nowrap;
+  height: 0;
+  background-color: #FFFFFF00 !important;
+  color: var(--text-color) !important;
+  outline-width: 0 !important;
+  outline: none !important;
+  border: 0 !important;
+  border:none !important;
+  box-shadow: none !important;
+  font-size: 10pt;
+  font-weight: lighter;
 }
