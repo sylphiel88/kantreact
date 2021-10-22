@@ -17,11 +17,6 @@ function SpeiseList(props) {
     const [date, setDate] = useState("")
     const [upDate, setUpDate] = useState()
     const [wochentag, setWochentag] = useState("Montag")
-    const [chgVKMeal, setChgVKMeal] = useState(false)
-    const [chgVGMeal, setChgVGMeal] = useState(false)
-    const [chgSVK, setChgSVK] = useState(false)
-    const [chgSVG, setChgSVG] = useState(false)
-    const [chgDessert, setChgDessert] = useState(false)
 
     useEffect(() => {
         if (open != props.openstate) {
@@ -49,16 +44,11 @@ function SpeiseList(props) {
                 setUpDate(speise.date)
             }
         })
-        setChgDessert(false)
-        setChgSVG(false)
-        setChgSVK(false)
-        setChgVGMeal(false)
-        setChgVKMeal(false)
     }, [day])
 
     useEffect(async () => {
         await axios.post("http://localhost:5000/api/v1/menu/update", { date: upDate, vk: vollkost, vg: vegetarisch, svk: suppeVk, svg: suppeVg, dessert: dessert })
-            .then(setTimeout(()=>{props.updateHandler()},500));
+            .then(setTimeout(() => { props.updateHandler() }, 500));
     }, [vollkost, dessert, suppeVk, vegetarisch, suppeVg])
 
     function wheelHandler(e) {
@@ -81,28 +71,8 @@ function SpeiseList(props) {
         }
     }
 
-    function chgMealVKHandler() {
-        setChgVKMeal(!chgVKMeal)
-    }
-
-    function chgMealVGHandler() {
-        setChgVGMeal(!chgVGMeal)
-    }
-
-    function chgSVKHandler() {
-        setChgSVK(!chgVGMeal)
-    }
-
-    function chgSVGHandler() {
-        setChgSVG(!chgVGMeal)
-    }
-
-    function chgDessertHandler() {
-        setChgDessert(!chgVGMeal)
-    }
-
     const changeVK = (event) => {
-        if(event.key === 'Enter'){
+        if (event.key === 'Enter') {
             console.log("jop");
             setVollkost(document.getElementById("changeVK").value)
         }
@@ -135,11 +105,11 @@ function SpeiseList(props) {
                     {date}
                 </div>
                 <div className="card-section">
-                    {!chgVKMeal && <h4 onClick={chgMealVKHandler}><span className="vkSp">{vollkost}</span></h4>}{chgVKMeal && <textarea id="changeVK" type="text" className="chgMealVK" value={vollkost} onKeyDown={changeVK}></textarea>}
+                    <textarea id="changeVK" type="text" className="chgMealVK" rows="2" value={vollkost} onKeyDown={changeVK}></textarea>
                     <p className="soupStyle">
-                        <span style={{float:"left"}}>Suppe: </span>{!chgSVK && <span onClick={chgSVKHandler} style={{float:"left", marginLeft:"7.7%"}}>{suppeVk}</span>}{chgSVK && <input id="changeSVK" type="text" className="chgSVK" value={suppeVk} onChange={changeSoupVK}></input>}
-                        <br/>
-                        <span style={{float:"left"}}>Dessert: </span>{!chgDessert && <span onClick={chgDessertHandler} style={{float:"left", marginLeft:"6.7%"}}>{dessert}</span>}{chgDessert && <input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>}
+                        <span style={{ float: "left" }}>Suppe: </span><input id="changeSVK" type="text" className="chgSVK" value={suppeVk} onChange={changeSoupVK}></input>
+                        <br />
+                        <span style={{ float: "left" }}>Dessert: </span><input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>
                     </p>
                 </div>
             </div>
@@ -148,12 +118,12 @@ function SpeiseList(props) {
                     <span class="spText">{date}</span>
                 </div>
                 <div className="card-section">
-                    {!chgVGMeal && <h4 onClick={chgMealVGHandler}><span className="vkSp">{vegetarisch}</span></h4>}{chgVGMeal && <input id="changeVG" type="text" className="chgMealVG" value={vegetarisch} onChange={changeVegetarisch}></input>}
-                    <p className="soupStyle">
-                    <span style={{float:"left"}}>Suppe: </span>{!chgSVG && <span onClick={chgSVGHandler} style={{float:"left", marginLeft:"7.7%"}}>{suppeVg}</span>}{chgSVG && <input id="changeSVG" type="text" className="chgSVG" value={suppeVg} onChange={changeSoupVG}></input>}
-                        <br/>
-                        <span style={{float:"left"}}>Dessert: </span>{!chgDessert && <span onClick={chgDessertHandler} style={{float:"left", marginLeft:"6.7%"}}>{dessert}</span>}{chgDessert && <input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>}
-                    </p>
+                    <textarea id="changeVG" type="text" className="chgMealVG" rows="2" value={vegetarisch} onChange={changeVegetarisch}></textarea>
+                    <div className="soupStyle">
+                        <span style={{ float: "left" }}>Suppe: </span><input id="changeSVG" type="text" className="chgSVG" value={suppeVg} onChange={changeSoupVG}></input>
+                        <br />
+                        <span style={{ float: "left" }}>Dessert: </span><input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>
+                    </div>
                 </div>
             </div>
         </div>

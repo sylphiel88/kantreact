@@ -1160,6 +1160,7 @@ a {
 }
 
 .chgMealVK{
+  resize: none;
   height: auto;
   width:28.5vw !important;
   background-color: #FFFFFF00 !important;
@@ -1170,7 +1171,7 @@ a {
   border:none !important;
   box-shadow: none !important;
   text-align: center;
-  font-size: 18pt;
+  font-size: 16pt;
 }
 
 .chgSVK{
@@ -1187,6 +1188,7 @@ a {
   box-shadow: none !important;
   font-size: 10pt;
   font-weight: lighter;
+  margin-top: -10%;
 }
 
 
@@ -1202,12 +1204,13 @@ a {
   border:none !important;
   box-shadow: none !important;
   font-size: 10pt;
-  font-weight: lighter;
+  font-weight: 100;
 }
 
 .chgMealVG{
+  resize: none;
   height: auto;
-  width: 80%;
+  width:28.5vw !important;
   background-color: #FFFFFF00 !important;
   color: var(--text-color) !important;
   outline-width: 0 !important;
@@ -1215,7 +1218,8 @@ a {
   border: 0 !important;
   border:none !important;
   box-shadow: none !important;
-  font-size: 18pt;
+  text-align: center;
+  font-size: 16pt;
 }
 
 .chgSVG{
