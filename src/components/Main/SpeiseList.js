@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import moment from "moment"
 import 'moment/locale/de'
-import { backdropUnstyledClasses } from "@mui/core"
 import axios from "axios"
 
 function SpeiseList(props) {
