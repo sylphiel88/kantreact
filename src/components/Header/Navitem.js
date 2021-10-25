@@ -1,17 +1,28 @@
 import React, { Component } from "react"
 import Dropdown from "./Dropdown"
 import Login from "./Login"
-import { IoLogoAngular,IoPersonOutline } from "react-icons/io5";
+import { IoLogoAngular, IoPersonOutline } from "react-icons/io5";
 import axios from 'axios'
 
 export default class Navitem extends Component {
     constructor(props) {
         super(props)
-        this.state = { open: false, logIn: false, loggedIn: false, usergr:"", user:"" }
+        this.state = { open: false, logIn: false, loggedIn: false, usergr: "", user: ""}
         this.handler = this.handler.bind(this)
         this.loginHandler = this.loginHandler.bind(this)
         this.logged = this.loggedHandler.bind(this)
         this.logOutHandler = this.logOutHandler.bind(this)
+        this.messageHandler = this.messageHandler.bind(this)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.modalstate == this.props.modalstate) {
+            this.props.modalHandler()
+        }
+    }
+
+    messageHandler(str) {
+        this.props.messageHandler(str)
     }
 
     handler() {
@@ -26,10 +37,10 @@ export default class Navitem extends Component {
         })
     }
 
-    logOutHandler(){
-        this.setState({loggedIn: false, login: false, user:"", usergr:""})
-        localStorage.setItem('authorization',null)
-        window.location.href="/"
+    logOutHandler() {
+        this.setState({ loggedIn: false, login: false, user: "", usergr: "" })
+        localStorage.setItem('authorization', null)
+        window.location.href = "/"
     }
 
     loginHandler() {
@@ -66,7 +77,7 @@ export default class Navitem extends Component {
                         <a href="#" className="icon-button" onClick={this.loginHandler}>
                             {this.props.icon}
                         </a>
-                        {this.state.logIn && <Login handler={this.loginHandler} stateo={this.state.logIn} />}
+                        {this.state.logIn && <Login messageHandler={this.messageHandler} modalHandler={()=>this.props.modalHandler(true)} handler={this.loginHandler} stateo={this.state.logIn} />}
                     </li>
                 )
             } else {
@@ -77,26 +88,26 @@ export default class Navitem extends Component {
                 })
                     .then(response => {
                         if (!this.state.loggedIn && response.data.login) {
-                            if(response.data.exp){
-                                this.setState({ loggedIn: false})
+                            if (response.data.exp) {
+                                this.setState({ loggedIn: false })
                             } else {
-                                this.setState({ loggedIn: true, user: response.data.dec  })
+                                this.setState({ loggedIn: true, user: response.data.dec })
                             }
                         }
-                        axios.get('http://localhost:5000/api/v1/user/usergroup',{
+                        axios.get('http://localhost:5000/api/v1/user/usergroup', {
                             headers: {
                                 "user": response.data.dec
                             }
-                        }).then(response =>{
-                            this.setState({usergr: response.data.ug})
+                        }).then(response => {
+                            this.setState({ usergr: response.data.ug })
                         })
-                    })                
+                    })
                 if (this.state.loggedIn) {
                     return (
                         <li>
                             <a href="#" className="icon-button" onClick={this.logOutHandler} title={this.state.user}>
-                            {this.state.usergr==="Administrator"?<IoLogoAngular />:""}
-                            {this.state.usergr==="Dozent"?<IoPersonOutline/>:""}
+                                {this.state.usergr === "Administrator" ? <IoLogoAngular /> : ""}
+                                {this.state.usergr === "Dozent" ? <IoPersonOutline /> : ""}
                             </a>
                         </li>
                     )
@@ -106,7 +117,7 @@ export default class Navitem extends Component {
                             <a href="#" className="icon-button" onClick={this.loginHandler}>
                                 {this.props.icon}
                             </a>
-                            {this.state.logIn && <Login handler={this.loginHandler} stateo={this.state.logIn} />}
+                            {this.state.logIn && <Login messageHandler={this.messageHandler}  modalHandler={()=>this.props.modalHandler(true)}  handler={this.loginHandler} stateo={this.state.logIn} />}
                         </li>
                     )
                 }

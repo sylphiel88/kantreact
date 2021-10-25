@@ -7,8 +7,8 @@ function UserList(props) {
     const [cardList, setCardList] = useState([])
     const [page, setPage] = useState(1)
     const [modalOpen, setModalOpen] = useState(false)
+    const [modalOpenN, setModalOpenN] = useState(false)
     const [modalText, setModalText] = useState("")
-    const [chkdList, chkdListChg] = useState([])
 
     if (props.page != page) {
         setPage(props.page)
@@ -19,54 +19,106 @@ function UserList(props) {
     }
 
     useEffect(() => {
-        const listItems = datar.map((user) =>
-            <UserCard username={user.username} perPage={props.perPage}/>
-        );
-        setCardList(listItems)
+        setModalOpen(false)
+        setModalOpenN(false)
+        var listItems = []
+        console.log(datar);
+        if (datar.length != 0) {
+            listItems = datar.map((user) =>
+                <UserCard username={user.username} perPage={props.perPage} />
+            );
+            setCardList(listItems)
+        } else {
+            setCardList([])
+            modalOpenHandlerN();
+        }
     }, [datar])
 
-    function modalOpenHandler() {
+    async function modalOpenHandler() {
         setModalOpen(!modalOpen)
     }
 
+    function modalOpenHandlerN() {
+        setModalOpenN(!modalOpenN)
+    }
+
+
     if (props.send) {
-        let userlist = []
+        let userlistA = []
+        let userlistD = []
         let numAct = 0
-        Array.from(document.getElementsByClassName("chkuser2")).forEach(function (card) {
-            if (card.checked) {
+        let numDel = 0
+        let modText = ""
+        Array.from(document.getElementsByClassName("chkuser2")).forEach(function (cardA) {
+            if (cardA.checked) {
                 numAct += 1
-                var un = card.id
-                userlist.push(un)
+                var unA = cardA.id.substr(0, cardA.id.length - 3)
+                userlistA.push(unA)
                 axios({
                     method: 'post',
                     url: 'http://localhost:5000/api/v1/user/activateUser',
                     headers: {},
                     data: {
-                        username: un
+                        username: unA
                     }
                 })
             }
-            if (numAct > 0) {
-                let modText = "Nutzer "
-                if (numAct == 1) {
-                    modText+=userlist[0]+" "
-                } else {
-                    userlist.forEach(function (userInL) {
-                        modText += userInL + ", "
-                    })
-                    modText = modText.substr(0, modText.length-2)+" "
-                }
-                modText+=numAct>1?"wurden aktiviert!":"wurde aktiviert!";
-                setModalText(modText)
-                modalOpenHandler()
+            cardA.checked = false
+        })
+        if (numAct > 0) {
+            modText = "Nutzer "
+            if (numAct == 1) {
+                modText += userlistA[0] + " "
+            } else {
+                userlistA.forEach(function (userInLA) {
+                    modText += userInLA + ", "
+                })
+                modText = modText.substr(0, modText.length - 2) + " "
             }
-            card.checked = false
-            props.setSendHandler();
+            modText += numAct > 1 ? "wurden aktiviert!" : "wurde aktiviert!";
         }
-        )
+        Array.from(document.getElementsByClassName("chkuser3")).forEach(function (cardD) {
+            if (cardD.checked) {
+                numDel += 1
+                var unD = cardD.id.substr(0, cardD.id.length - 3)
+                userlistD.push(unD)
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:5000/api/v1/user/deleteUser',
+                    headers: {},
+                    data: {
+                        username: unD
+                    }
+                })
+            }
+            cardD.checked = false;
+        })
+        if (numDel > 0) {
+            modText += numAct > 0 ? " | " : ""
+            modText += "Nutzer "
+            if (numDel == 1) {
+                modText += userlistD[0] + " "
+            } else {
+                userlistD.forEach(function (userInLD) {
+                    modText += userInLD + ", "
+                })
+                modText = modText.substr(0, modText.length - 2) + " "
+            }
+            modText += numDel > 1 ? "wurden entfernt!" : "wurde entfernt!";
+        }
+        if (numAct > 0 || numDel > 0) {
+            props.setSendHandler();
+            setModalText(modText)
+            modalOpenHandler()
+        }
     }
 
-    return <div>{modalOpen && <InformationModal open={modalOpen} openHandler={modalOpenHandler} text={modalText} />}{cardList}</div>
+    return (
+        <div className="userlistMarg">
+            {modalOpen && <InformationModal open={modalOpen} openHandler={modalOpenHandler} text={modalText} />}
+            {modalOpenN && <InformationModal open={modalOpenN} openHandler={modalOpenHandlerN} text="Keine Nutzer gefunden!" />}
+            {cardList}
+        </div>)
 }
 
 
