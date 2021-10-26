@@ -24,7 +24,8 @@ const Speiseplan = props => {
     return (
         <div className="container">
             <br />
-            <div>
+            <div className="speiseImage"></div>
+            <div className="speiseplanKomplett">
                 <div className="vollkost">
                     <h3 className="titelVK"> Vollkost </h3>
                     {speisen.map((speise) => {

@@ -10,7 +10,6 @@ function Login(props) {
     const [signUp, setSignUp] = useState(false)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const [antwort, setAntwort] = useState("")
     const [email, setEmail] = useState("")
     const [passwordc, setPasswordc] = useState("")
     const [passwordtest, setPasswordtest] = useState(false)
@@ -18,11 +17,15 @@ function Login(props) {
     const [msg, setMessage] = useState("")
     const [signInloaded, setSignInloaded] = useState(false)
     const [token, setToken] = useState("")
-    const [modalOpen, setModalOpen] = useState(false)
 
-    async function setModalHandler() {
-        setModalOpen(false)
-    }
+    useEffect(() => {
+        console.log(token);
+        if (token != "") {
+            localStorage.setItem('authorization', token)
+            props.handler(false)
+        }
+    }, [token])
+
 
     async function setEyeHandler() {
         console.log(password);
@@ -159,11 +162,10 @@ function Login(props) {
                 await fetch('http://localhost:5000/api/v1/user/signin', requestOptions)
                     .then(response => response.json())
                     .then(data => {
-                        setMessage(data.message)
                         setToken(data.authorization)
+                        props.messageHandler(data.message)
+                        props.modalHandler(true)
                     })
-                    .then(setModalHandler(true))
-                    .then(localStorage.setItem('authorization', token))
             }
         }
     }
@@ -223,13 +225,12 @@ function Login(props) {
                 {signUp && emailtest && <ReactTooltip id="email-tooltip" >Keine Valide Email!</ReactTooltip>}
                 <div className={signUp ? "absolutf" : "absolutf2"}>
                     <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
-                    {!eye ? <div className="input-group "><input data-tip data-class="tt1" data-for="pass-tooltip" id='password' type="password" className={signUp ? (passwordtest ? "input-group-field inputl pwt":"input-group-field inputl pwt2") : "input-group-field inputl"} onChange={setPwHandler}></input><div className="input-group-label eyediv" value={password}><IoMdEye className="eye" onClick={setEyeHandler} /></div></div> : <div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={setPwHandler}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={setEyeHandler} value={password}/></div></div>}
+                    {!eye ? <div className="input-group "><input data-tip data-class="tt1" data-for="pass-tooltip" id='password' type="password" className={signUp ? (passwordtest ? "input-group-field inputl pwt" : "input-group-field inputl pwt2") : "input-group-field inputl"} onChange={setPwHandler}></input><div className="input-group-label eyediv" value={password}><IoMdEye className="eye" onClick={setEyeHandler} /></div></div> : <div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={setPwHandler}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={setEyeHandler} value={password} /></div></div>}
                     {signUp && passwordtest && <ReactTooltip id="pass-tooltip" >Passwörter müssen verdichtet sein!</ReactTooltip>}
                 </div>
                 <br /><br /><br />
-                {!eye2 && signUp && <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => setEye2Handler()} /></div></div></div>}
-                {eye2 && signUp && <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => setEye2Handler()} /></div></div></div>}
-                {signUp &&<div><br /><br /><br /></div>}
+                {signUp && (!eye2 ? <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => setEye2Handler()} /></div></div></div> : <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => setEye2Handler()} /></div></div></div>)}
+                {signUp && <div><br /><br /><br /></div>}
                 <div className={signUp ? "absolutf" : "absolutf2"}>
                     <div className="input-group">
                         {!signUp && <label id='signin' className="input-group-label inputb" onClick={signInHandler}><a href="#"><IoIosCheckmark className="buttonicon" /></a>Sign In</label>}

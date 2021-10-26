@@ -7,18 +7,12 @@ import axios from 'axios'
 export default class Navitem extends Component {
     constructor(props) {
         super(props)
-        this.state = { open: false, logIn: false, loggedIn: false, usergr: "", user: ""}
+        this.state = { open: false, logIn: false, loggedIn: false, usergr: "", user: "" }
         this.handler = this.handler.bind(this)
         this.loginHandler = this.loginHandler.bind(this)
         this.logged = this.loggedHandler.bind(this)
         this.logOutHandler = this.logOutHandler.bind(this)
         this.messageHandler = this.messageHandler.bind(this)
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.modalstate == this.props.modalstate) {
-            this.props.modalHandler()
-        }
     }
 
     messageHandler(str) {
@@ -39,8 +33,9 @@ export default class Navitem extends Component {
 
     logOutHandler() {
         this.setState({ loggedIn: false, login: false, user: "", usergr: "" })
-        localStorage.setItem('authorization', null)
-        window.location.href = "/"
+        localStorage.removeItem('authorization');
+        this.props.messageHandler("Erfolgreich ausgeloggt!")
+        this.props.modalHandler(true)
     }
 
     loginHandler() {
@@ -74,10 +69,10 @@ export default class Navitem extends Component {
             if (!token) {
                 return (
                     <li>
-                        <a href="#" className="icon-button" onClick={this.loginHandler}>
+                        <a href="#" className="icon-button icon-button2" onClick={this.loginHandler}>
                             {this.props.icon}
                         </a>
-                        {this.state.logIn && <Login messageHandler={this.messageHandler} modalHandler={()=>this.props.modalHandler(true)} handler={this.loginHandler} stateo={this.state.logIn} />}
+                        {this.state.logIn && <Login messageHandler={this.props.messageHandler} modalHandler={this.props.modalHandler} handler={this.loginHandler} stateo={this.state.logIn} />}
                     </li>
                 )
             } else {
@@ -105,7 +100,7 @@ export default class Navitem extends Component {
                 if (this.state.loggedIn) {
                     return (
                         <li>
-                            <a href="#" className="icon-button" onClick={this.logOutHandler} title={this.state.user}>
+                            <a href="#" className="icon-button icon-button2" onClick={this.logOutHandler} title={this.state.user}>
                                 {this.state.usergr === "Administrator" ? <IoLogoAngular /> : ""}
                                 {this.state.usergr === "Dozent" ? <IoPersonOutline /> : ""}
                             </a>
@@ -114,10 +109,10 @@ export default class Navitem extends Component {
                 } else {
                     return (
                         <li>
-                            <a href="#" className="icon-button" onClick={this.loginHandler}>
+                            <a href="#" className="icon-button icon-button2" onClick={this.loginHandler}>
                                 {this.props.icon}
                             </a>
-                            {this.state.logIn && <Login messageHandler={this.messageHandler}  modalHandler={()=>this.props.modalHandler(true)}  handler={this.loginHandler} stateo={this.state.logIn} />}
+                            {this.state.logIn && <Login messageHandler={this.props.messageHandler} modalHandler={this.props.modalHandler} handler={this.loginHandler} stateo={this.state.logIn} />}
                         </li>
                     )
                 }
@@ -125,7 +120,7 @@ export default class Navitem extends Component {
         } else {
             return (
                 <li>
-                    <a href="#" className="icon-button" onClick={this.handler}>
+                    <a href="#" className="icon-button icon-button1" onClick={this.handler}>
                         {this.props.icon}
                     </a>
                     {this.state.open && <Dropdown handler={this.handler} stateo={this.state.open} />}

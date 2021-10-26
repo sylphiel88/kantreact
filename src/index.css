@@ -7,12 +7,20 @@ body {
   background: #c0e1ff7a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-  width: 100%;
+}
+
+.bgimage{
+  z-index: -2;
   background-image: url('Image/titelblatt.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-size: 80vw 80vh;
+  filter: contrast(200%) drop-shadow(0 0 20px rgb(31, 31, 87)) blur(1px) opacity(0.35) drop-shadow(0 0 50px black) saturate(150%);
+  position: fixed;
+  top:0;
+  left:0;
+  height: 100vh;
+  width: 100vw;
 }
 
 .noShow{
@@ -88,13 +96,24 @@ a {
   background-color: #081f41;
   box-shadow: 0 0 10px rgb(34, 34, 34);
   border-radius: 50%;
-  padding: 5px;
   margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: filter 300ms;
   color: var(--text-color);
+}
+
+.icon-button1 {
+  position: fixed;
+  right:20px;
+  top: 5px;
+}
+
+.icon-button2 {
+  position: fixed;
+  right: 70px;
+  top:5px;
 }
 
 .icon-button:hover {
@@ -107,14 +126,63 @@ a {
   height: 30px;
 }
 
+@keyframes drehung {
+  0% { transform: rotateY(0deg);}
+  25% {top: 5px;}
+  50% { transform: rotateY(-360deg); top:-5px; font-size: 30pt; background-color: linear-gradient(var(--text-color),rgb(209, 209, 209)); background-clip: text; color:rgba(0, 0, 0, 0)}
+  75% {top: -15px;}
+  100% { transform: rotateY(0deg); font-size: 20pt; top: 0px;}
+}
+
 .apptitle {
   display:flex;
-  margin-right: 48%;
+  margin-right: 44%;
   justify-content: center;
   font-weight: bolder;
   font-size: 20pt;
   text-shadow: -1px -1px 10px rgb(0, 0, 0), 1px 1px 10px black;
   color: var(--text-color);
+}
+
+li{
+  display: inline-block;
+  width: 20px;
+  position: relative;
+  top:0;
+  left:0;
+}
+
+.kLetter {
+  animation: drehung 0.6s forwards linear;
+}
+
+.aLetter{
+  animation: drehung 0.6s 0.1s forwards linear;
+}
+
+.nLetter{
+  margin-left: -3px;
+  animation: drehung 0.6s 0.2s forwards linear;
+}
+
+.tLetter{
+  margin-left: -2px;
+  animation: drehung 0.6s 0.3s forwards linear;
+}
+
+.iLetter{
+  margin-left: -7px;
+  animation: drehung 0.6s 0.4s forwards linear;
+}
+
+.nLetter2{
+  margin-left: -9px;
+  animation: drehung 0.6s 0.5s forwards linear;
+}
+
+.eLetter{
+  margin-left: -3px;
+  animation: drehung 0.6s 0.6s forwards linear;
 }
 
 /* Dropdown Menu */
@@ -161,14 +229,14 @@ a {
 .dropdown {
   z-index: 10;
   position: absolute;
-  top: 50px;
+  top: 30px;
   width: 300px;
   transform: translateX(-65%);
   background-image: linear-gradient(#4d6e8fc0, #4d6e8fff);
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 1rem;
-  overflow: hidden;
+  overflow: hidden !important;
   transition: height var(--speed) ease;
 }
 
@@ -218,18 +286,19 @@ a {
 
 .vollkost {
   float: left;
-  width: 30%;
-  margin-left: 25%;
+  width: 49.5%;
 }
+
 .vegetarisch {
   float: right;
-  width: 30%;
-  margin-right: 10%;
+  width: 49.5%;
 }
+
 @keyframes blur {
   0%   {filter:blur(0px);}
   100% {filter:blur(5px);}
 }
+
 .blur{
   filter:blur(5px);
   animation-name: blur;
@@ -281,15 +350,15 @@ a {
 
 
 .login-feld-signin{
-  z-index: 1;
+  z-index: 10;
+  position: fixed;
+  left: 40vw;
+  top: 30vh;
   opacity: 0;
-  position: absolute;
   background: var(--bg-accent2);
   backdrop-filter:opacity(0.5);
   border: outset 4px var(--bg);
   filter: blur(5px);
-  left: 40vw;
-  top: 30vh;
   width: 0vw;
   height:0vh;
   padding: 2%;
@@ -301,9 +370,9 @@ a {
   animation-fill-mode: forwards;
 }
 .login-feld-signin-out{
-  z-index: 1;
+  z-index: 5;
   opacity: 0;
-  position: absolute;
+  position: fixed;
   background: var(--bg-accent2);
   backdrop-filter:opacity(0.5);
   border: outset 4px var(--bg);
@@ -328,7 +397,7 @@ a {
   top: 30vh;
   width: 20vw;
   opacity: 0.93;
-  position: absolute;
+  position: fixed;
   background: var(--bg-accent2);
   border: outset 4px var(--bg);
   padding: 2%;
@@ -347,7 +416,7 @@ a {
   top: 20vh;
   width: 20vw;
   opacity: 0.93;
-  position: absolute;
+  position: fixed;
   background: var(--bg-accent2);
   border: outset 4px var(--bg);
   padding: 2%;
@@ -476,7 +545,35 @@ a {
   100% {color: var(--text-color);}
 }
 
+.spalte1Img{
+  background-color: #081f41;
+  background-image: url("../src/Image/user.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
+  filter:grayscale();
+  opacity: 0.5;
+  z-index: -1;
+}
+
+@keyframes deset {
+  100%{opacity: 0;}
+}
+
+.bigimg{
+  background-color: #081f41;
+  background-image: url("../src/Image/user.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
+  z-index: -1;
+  opacity: 1;
+  animation: desat 0.5s forwards linear;
+}
+
 .spalte1 {
+  background-color: #081f41;
+  background-image: url("../src/Image/user.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
   box-shadow: 0 0 15px black;
   z-index: 0;
   position: absolute;
@@ -502,6 +599,10 @@ a {
   border: 10px outset #00122b;
 }
 .spalte2 {
+  background-color: #081f41;
+  background-image: url("../src/Image/speisen.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
   box-shadow: 0 0 15px black;
   z-index: 0;
   position: absolute;
@@ -513,7 +614,6 @@ a {
   opacity: 0.6;
   width: 27vw;
   float: left;
-  background-color: #081f41;
   margin: 2px;
   font-size: 20pt;
   color: var(--text-color2);
@@ -724,7 +824,11 @@ a {
   animation-fill-mode: forwards;
 }
 
-.spalte_big{
+.spalte_big1{
+  background-color: #081f41;
+  background-image: url("../src/Image/user.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
   z-index: 1 !important;
   display: flex;
   flex-direction: column;
@@ -745,6 +849,123 @@ a {
   background-color: #081f41;
   border: 5px inset var(--bg-accent2);
 }
+
+.spalte_big2{
+  background-color: #081f41;
+  background-image: url("../src/Image/speisen.jpg");
+  background-size: cover;
+  background-blend-mode: overlay;
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 81vh; 
+  width:81.6vw; 
+  top: 4vh; 
+  left: 10vw;
+  opacity: 0.93;
+  border-radius: 25px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
+  font-size: 20pt;
+  color: var(--text-color);
+  box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
+  background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
+}
+
+
+.spalte_big3{
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 81vh; 
+  width:81.6vw; 
+  top: 4vh; 
+  left: 10vw;
+  opacity: 0.93;
+  border-radius: 25px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
+  font-size: 20pt;
+  color: var(--text-color);
+  box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
+  background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
+}
+
+.spalte_big4{
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 81vh; 
+  width:81.6vw; 
+  top: 4vh; 
+  left: 10vw;
+  opacity: 0.93;
+  border-radius: 25px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
+  font-size: 20pt;
+  color: var(--text-color);
+  box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
+  background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
+}
+
+.spalte_big5{
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 81vh; 
+  width:81.6vw; 
+  top: 4vh; 
+  left: 10vw;
+  opacity: 0.93;
+  border-radius: 25px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
+  font-size: 20pt;
+  color: var(--text-color);
+  box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
+  background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
+}
+
+.spalte_big6{
+  z-index: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 81vh; 
+  width:81.6vw; 
+  top: 4vh; 
+  left: 10vw;
+  opacity: 0.93;
+  border-radius: 25px;
+  padding: 10px;
+  padding-top: 8.5vh;
+  padding-left: 2vw;
+  font-size: 20pt;
+  color: var(--text-color);
+  box-shadow: 0px 0px 2em rgb(0, 0, 0), inset 5px -5px 1em rgb(51, 51, 51);
+  background-color: #081f41;
+  border: 5px inset var(--bg-accent2);
+}
+
+
 
 @keyframes closebut {
   100% {opacity: 0.93;}
@@ -1013,7 +1234,7 @@ a {
 
 .InfoModal{
   z-index: 100;
-  position: absolute;
+  position: fixed;
   top:20px;
   left:600px;
   width: 300px;
@@ -1125,8 +1346,7 @@ a {
   background-color: #bb4d4383;
   margin-top:-15px !important;
   color: #FFFBE0FF;
-  height: 160px;
-  width: 300px;
+  height: 16vh;
 }
 .cardVG{
   border: 2px outset #65e7a2;
@@ -1134,13 +1354,12 @@ a {
   background-color: #20744783;
   margin-top:-15px !important;
   color: #FFFBE0FF;
-  height: 160px;
-  width: 300px;
+  height: 16vh;
 }
 
 .titelVK{
-  width:107%;
   background-color:#bb4d4383;
+  height:5vh;
   border-radius: 10px;
   border: 2px outset #DB8179;
   margin-bottom:15px;
@@ -1149,8 +1368,8 @@ a {
 }
 
 .titelVG {
-  width:107%;
   background-color:#20744783;
+  height:5vh;
   border-radius: 10px;
   border: 2px outset #65e7a2;
   margin-bottom:15px;
@@ -1349,4 +1568,23 @@ a {
   position: absolute;
   top: 0.5%;
   left: 25.8%;
+}
+
+.speiseplanKomplett {
+  z-index: 10;
+  margin-top:-0.8vh;
+  margin-left: 20vw;
+  width: 30vw;
+}
+
+.speiseImage{
+  background-image: url("../src/Image/speisen.jpg");
+  z-index: -1;
+  position: fixed;
+  top:0vh;
+  left:37vw;
+  width: 30vw;
+  height: 90vh;
+  filter: blur(1px) saturate(40%);
+  opacity: 0.3;
 }

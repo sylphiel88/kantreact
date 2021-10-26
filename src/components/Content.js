@@ -23,7 +23,7 @@ function Content() {
     } else {
         ret = <Router history={history}><Route exact path="/" component={Main} /><Route exact path="/#" component={Main} /><Route path="/speiseplan" component={Speiseplan} /><Route path="/register" component={Register} /></Router>
     }
-    return (<div className="container">{ret}</div>)
+    return (<div className="container"><div class="bgimage"></div>{ret}</div>)
 }
 
 export default Content

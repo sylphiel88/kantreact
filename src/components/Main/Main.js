@@ -55,11 +55,11 @@ function Main({prop}) {
 
         let ret
         if(usergr === "Administrator"){
-            ret=<Administrator />
+            ret=<div><div class="bgimage"></div><Administrator/></div>
         } else if(usergr==="Dozent"){
-            ret=<Dozent/>
+            ret=<div><div class="bgimage"></div><Dozent/></div>
         } else {
-            ret=""
+            ret=<div class="bgimage"></div>
         }
         return ret
     }
