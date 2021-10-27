@@ -10,16 +10,16 @@ body {
 }
 
 .bgimage{
-  z-index: -2;
+  z-index: -10;
   background-image: url('Image/titelblatt.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 80vw 80vh;
-  filter: contrast(200%) drop-shadow(0 0 20px rgb(31, 31, 87)) blur(1px) opacity(0.35) drop-shadow(0 0 50px black) saturate(150%);
+  filter: contrast(200%) drop-shadow(0 0 20px rgb(31, 31, 87)) opacity(0.4) drop-shadow(0 0 50px black) saturate(150%);
   position: fixed;
   top:0;
   left:0;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
 }
 
@@ -545,34 +545,15 @@ li{
   100% {color: var(--text-color);}
 }
 
-.spalte1Img{
-  background-color: #081f41;
-  background-image: url("../src/Image/user.jpg");
-  background-size: cover;
-  background-blend-mode: overlay;
-  filter:grayscale();
-  opacity: 0.5;
-  z-index: -1;
-}
-
-@keyframes deset {
+@keyframes desat {
   100%{opacity: 0;}
 }
 
-.bigimg{
-  background-color: #081f41;
-  background-image: url("../src/Image/user.jpg");
-  background-size: cover;
-  background-blend-mode: overlay;
-  z-index: -1;
-  opacity: 1;
-  animation: desat 0.5s forwards linear;
-}
 
 .spalte1 {
-  background-color: #081f41;
-  background-image: url("../src/Image/user.jpg");
+  background-image: url("../src/Image/user_gs.png");
   background-size: cover;
+  background-color: #081f41;
   background-blend-mode: overlay;
   box-shadow: 0 0 15px black;
   z-index: 0;
@@ -582,10 +563,9 @@ li{
   left: 10vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
-  background-color: #081f41;
   margin: 2px;
   font-size: 20pt;
   flex-direction: column;
@@ -599,9 +579,9 @@ li{
   border: 10px outset #00122b;
 }
 .spalte2 {
-  background-color: #081f41;
-  background-image: url("../src/Image/speisen.jpg");
+  background-image: url("../src/Image/speisen_gs.png");
   background-size: cover;
+  background-color: #081f41;
   background-blend-mode: overlay;
   box-shadow: 0 0 15px black;
   z-index: 0;
@@ -611,7 +591,7 @@ li{
   left: 37.3vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
   margin: 2px;
@@ -637,7 +617,7 @@ li{
   left: 64.6vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
   background-color: #081f41;
@@ -663,7 +643,7 @@ li{
   left: 10vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
   background-color: #081f41;
@@ -689,7 +669,7 @@ li{
   left: 37.3vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
   background-color: #081f41;
@@ -715,7 +695,7 @@ li{
   left: 64.6vw;
   border-radius: 25px;
   height: 40vh;
-  opacity: 0.6;
+  opacity: 0.8;
   width: 27vw;
   float: left;
   background-color: #081f41;
@@ -737,6 +717,7 @@ li{
 }
 
 @keyframes spalte1 {
+  50%{opacity: 0;}
   100% {color: var(--text-color2); height: 40vh; width:27vw; top: 4vh; left: 10vw; opacity: 0.6; box-shadow: 0px 0px 0em rgb(0, 0, 0), inset 0px 0px 0em rgb(51, 51, 51);background-color: #081f41;padding-right: 0;padding-bottom: 0;border: 2px inset var(--bg-accent2);}
 }
 
@@ -770,8 +751,12 @@ li{
 }
 
 .spalte_anim1{
+  background-image: url("../src/Image/user_gs.png");
+  background-size: cover;
+  background-color: #081f41;
+  background-blend-mode: overlay;
   position: absolute;
-  z-index: 1 !important;
+  z-index:2 !important;
   animation-name: spalte1;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -780,8 +765,12 @@ li{
 
 
 .spalte_anim2{
+  background-image: url("../src/Image/speisen_gs.png");
+  background-size: cover;
+  background-color: #081f41;
+  background-blend-mode: overlay;
   position: absolute;
-  z-index: 1 !important;
+  z-index: 2 !important;
   animation-name: spalte2;
   animation-timing-function: linear;
   animation-duration: 1s;
@@ -826,7 +815,7 @@ li{
 
 .spalte_big1{
   background-color: #081f41;
-  background-image: url("../src/Image/user.jpg");
+  background-image: url("../src/Image/user_gs.png");
   background-size: cover;
   background-blend-mode: overlay;
   z-index: 1 !important;
@@ -852,7 +841,7 @@ li{
 
 .spalte_big2{
   background-color: #081f41;
-  background-image: url("../src/Image/speisen.jpg");
+  background-image: url("../src/Image/speisen_gs.png");
   background-size: cover;
   background-blend-mode: overlay;
   z-index: 1 !important;
@@ -1573,7 +1562,7 @@ li{
 .speiseplanKomplett {
   z-index: 10;
   margin-top:-0.8vh;
-  margin-left: 20vw;
+  margin-left:18vw;
   width: 30vw;
 }
 
@@ -1581,10 +1570,10 @@ li{
   background-image: url("../src/Image/speisen.jpg");
   z-index: -1;
   position: fixed;
-  top:0vh;
-  left:37vw;
+  top:2vh;
+  left:35vw;
   width: 30vw;
-  height: 90vh;
+  height: 85vh;
   filter: blur(1px) saturate(40%);
   opacity: 0.3;
 }

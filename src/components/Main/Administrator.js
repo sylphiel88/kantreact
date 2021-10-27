@@ -29,8 +29,8 @@ function Administrator({ props }) {
     return (
         <div>
             <div className="zeile" style={{ marginTop: "5vh" }}>
-                <div id="s1" className={curPage === 1 ? "spalte1 spalte_anim" : "spalte1"} onClick={() => setCurPage(1)}>{curPage===1?<UserC close={closingState}/>:"User-Kontrollzentrum"}<div className="spalte1Img"></div></div>
-                <div id="s2" className={curPage === 2 ? "spalte2 spalte_anim" : "spalte2"} onClick={() => setCurPage(2)}>{curPage===2?<SpeiseplanPanel close={closingState}/>:"Speiseplan"}</div>
+                <div id="s1" className={curPage === 1 ? "spalte1 spalte_anim" : "spalte1"} onClick={() => setCurPage(1)}><div className="spalte1Img"></div>{curPage===1?<UserC close={closingState}/>:"User-Kontrollzentrum"}</div>
+                <div id="s2" className={curPage === 2 ? "spalte2 spalte_anim" : "spalte2"} onClick={() => setCurPage(2)}>{curPage===2?<SpeiseplanPanel close={closingState}/>:"Speiseplan"}<div className="spalte2Img"></div></div>
                 <div id="s3" className={curPage === 3 ? "spalte3 spalte_anim" : "spalte3"} onClick={() => setCurPage(3)}>c</div>
             </div>
             <div className="zeile">
