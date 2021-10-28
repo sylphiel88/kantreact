@@ -44,7 +44,7 @@ function Main({prop}) {
                         setUser(response.data.dec)
                     }
                 }
-                axios.get('http://localhost:5000/api/v1/user/usergroup', {
+                axios.get('http://localhost:5000/api/v1/user/getUserData', {
                     headers: {
                         "user": response.data.dec
                     }

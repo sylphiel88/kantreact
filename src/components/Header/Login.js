@@ -17,6 +17,19 @@ function Login(props) {
     const [msg, setMessage] = useState("")
     const [signInloaded, setSignInloaded] = useState(false)
     const [token, setToken] = useState("")
+    const [usergr, setUsergr] = useState("adm")
+    const [gotDeps, setGotDeps] = useState(false)
+    const [deps, setDeps] = useState({})
+
+    useEffect(async ()=>{
+        if(!gotDeps){
+            var array=[]
+            await fetch('http://localhost:5000/api/v1/class/getAllDepartments',{method:"GET",headers:{"Content-Type":"application/json"}})
+            .then(response => response.json())
+            .then(data => setDeps({data}))
+            setGotDeps(true)
+        }
+    })
 
     useEffect(() => {
         console.log(token);
@@ -121,7 +134,8 @@ function Login(props) {
                     body: JSON.stringify({
                         username: username,
                         password: password,
-                        email: email
+                        email: email,
+                        usergr: usergr
                     })
                 };
                 await fetch('http://localhost:5000/api/v1/user/signup', requestOptions)
@@ -170,6 +184,38 @@ function Login(props) {
         }
     }
 
+    function nextGroup(){
+        if(usergr=="adm"){
+            setUsergr("par")
+        } else if(usergr=="par"){
+            setUsergr("doz")
+        } else if(usergr=="doz"){
+            setUsergr("coo")
+        } else {
+            setUsergr("adm")
+        }
+    }
+
+    function backGroup(){
+        if(usergr=="adm"){
+            setUsergr("coo")
+        } else if(usergr=="par"){
+            setUsergr("adm")
+        } else if(usergr=="doz"){
+            setUsergr("par")
+        } else {
+            setUsergr("doz")
+        }
+    }
+
+    function wheelHandler(e) {
+        if (e.deltaY === 100) {
+            nextGroup()
+        }
+        if (e.deltaY === -100) {
+            backGroup()
+        }
+    }
 
     useEffect(() => {
         if (open != props.stateo) {
@@ -177,38 +223,6 @@ function Login(props) {
         }
     })
 
-    // handleClickOutside(event) {
-    //     if (this.wrapperRef) {
-    //         if ((event.clientX < 710 || event.clientX > 1150 || event.clientY < 260 || event.clientY > 800) && (event.clientX < 1800 && event.clientY > 50)) {
-    //             this.changeOpen()
-    //         }
-    //     }
-    // }
-    // if (open == true) {
-    //     if (passwordtest) {
-    //         setClasses("input-group-field inputl pwt")
-    //     } else {
-    //         setClasses("input-group-field inputl pwt2")
-    //     }
-    //     if (!eye) {
-    //         setText(<div className="input-group "><input data-tip data-class="tt1" data-for="pass-tooltip" id='password' type="password" className={this.state.signUp ? classes : "input-group-field inputl"} onChange={(event) => this.setPw(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => this.setEye()} /></div></div>)
-    //     } else {
-    //         setText(<div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={(event) => this.setPw(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye()} /></div></div>)
-    //     }
-    //     if (signUp == false) {
-    //         setButton1(<label id='signin' className="input-group-label inputb" onClick={signInHandler}><a href="#"><IoIosCheckmark className="buttonicon" /></a>Sign In</label>)
-    //         setButton2(<label id='signup' className="input-group-label inputb2" onClick={signUpHandler}><IoIosArrowRoundForward className="buttonicon2" />Sign Up</label>)
-    //     } else {
-    //         setButton1(<label id='signin' className="input-group-label inputb2" onClick={signInHandler}><a href="#"><IoIosArrowRoundForward className="buttonicon2" /></a>Zurück</label>)
-    //         setButton2(<label id='signup' className="input-group-label inputb" onClick={signUpHandler}><IoIosCheckmark className="buttonicon" />Sign Up</label>)
-    //         setEmailField(<div><div className={signUp ? "absolutf" : "absolutf2"}><label for='email' style={{ color: "#f0f0f0" }}>Email: </label><div data-tip data-class="tt" data-for="email-tooltip"><input id='email' type="text" className={emailtest ? "inputl pwt" : "inputl pwt2"} onChange={(event) => setEmail(event.target.value)}></input></div></div><br /><br /><br /></div>)
-    //         if (!eye2) {
-    //             setPwconfirm(<div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => setPasswordc(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => this.setEye2()} /></div></div></div>)
-    //         } else {
-    //             setPwconfirm(<div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => setPasswordc(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => this.setEye2()} /></div></div></div>)
-    //         }
-    //         br = <span><br /><br /><br /></span>
-    //     }
     if (open) {
         return (
             <div className={!signInloaded ? "login-feld-signin" : signUp ? "login-feld-signup" : "login-feld-signin-2"} id="login-feld">
@@ -231,6 +245,15 @@ function Login(props) {
                 <br /><br /><br />
                 {signUp && (!eye2 ? <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => setEye2Handler()} /></div></div></div> : <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => setEye2Handler()} /></div></div></div>)}
                 {signUp && <div><br /><br /><br /></div>}
+                {signUp &&
+                    <div className="usergrButtonWrapper" onWheel={e=>wheelHandler(e)}>
+                        <label className={usergr == "adm" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("adm")} title="Administrator">A</label>
+                        <label className={usergr == "par" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("par")} title="Schüler">S</label>
+                        <label className={usergr == "doz" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("doz")} title="Dozent">D</label>
+                        <label className={usergr == "coo" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("coo")} title="Küche">K</label>
+                    </div>
+                }
+                {signUp && <div><br /><br/></div>}
                 <div className={signUp ? "absolutf" : "absolutf2"}>
                     <div className="input-group">
                         {!signUp && <label id='signin' className="input-group-label inputb" onClick={signInHandler}><a href="#"><IoIosCheckmark className="buttonicon" /></a>Sign In</label>}

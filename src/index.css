@@ -2,6 +2,10 @@
   font-family: "Bahnschrift";
 }
 
+input[type="file"]{
+  display: none;
+}
+
 body {
   margin: 0;
   background: #c0e1ff7a;
@@ -40,7 +44,8 @@ a:hover {
   --bg-accent: #3a5379c0;
   --bg-accent2: #91a6c5;
   --bg-accent3: #becce2e5;
-  --bg-accent4: #3a5379;
+  --bg-accent4: rgb(58,83,121);
+  --bg-accent5: #1e3352;
   --text-color: rgb(255, 251, 224);
   --text-color2:  rgba(255, 251, 224,0);
   --nav-size: 60px;
@@ -341,10 +346,10 @@ li{
 
 @keyframes expandin2 {
   0%    {left:40vw;top: 30vh;width: 20vw;opacity: 0.93;}
-  100%  {height:44vh;left:40vw; top: 20vh;opacity: 0.93;} 
+  100%  {height:50vh;left:40vw; top: 17vh;opacity: 0.93;} 
 }
 @keyframes expandin3 {
-  0%    {height:44vh;left:40vw; top: 20vh;opacity: 0.93;}
+  0%    {height:50vh;left:40vw; top: 17vh;opacity: 0.93;}
   100%  {height:28vh;left:40vw; top: 30vh;opacity: 0.93;} 
 }
 
@@ -411,9 +416,9 @@ li{
 
 .login-feld-signin-2{
   z-index: 1;
-  height:44vh;
+  height:50vh;
   left:40vw;
-  top: 20vh;
+  top: 17vh;
   width: 20vw;
   opacity: 0.93;
   position: fixed;
@@ -1585,12 +1590,11 @@ li{
   left:0;
   width: 100vw;
   height: 100vw;
-  backdrop-filter: blur(2px);
 }
 
 .profileCard {
   color: var(--text-color) !important;
-  background-color: #3a5379;
+  background-color:rgba(58, 83, 121, 0.8);
   z-index: 11;
   position: fixed;
   top: 100px;
@@ -1608,7 +1612,8 @@ li{
   right: 0;
   width:300px;
   height: 100vh;
-  background-color: lightgrey;
+  background-color: rgba(187, 190, 241, 0.7);
+  backdrop-filter: blur(5px);
 }
 
 .profileLogo{
@@ -1616,8 +1621,8 @@ li{
   float: left;
   border-radius: 25px;
   border: var(--text-color) 1px solid;
-  width:50px;
-  height:50px;
+  width:42px !important;
+  height:42px !important; 
 }
 
 .profileUserText{
@@ -1651,10 +1656,140 @@ li{
 
 .profileIcon{
   position: absolute;
-  color: #00122b;
-  top: 20px;
-  left: 20px;
-  width:40px;
-  height: 40px;
+  color: var(--text-color);
+  top: 16px;
+  left: 16px;
+  width:35px;
+  height: 45px;
+  filter: drop-shadow(1px 1px 2px var(--text-color)) drop-shadow(-1px -1px 2px var(--text-color));
   pointer-events: none;
+}
+
+.emailIcon{
+  position: relative;
+  top:7.5px;
+  width:25px;
+  height:25px;
+  padding:5px;
+  background-color:var(--bg-accent5);
+  color:var(--text-color);
+  border-radius:20px;
+  margin-right:5px;
+}
+
+.profileButtonWrapper{
+  width:300px;
+}
+
+.profileButton{
+  text-align: center;
+  float: left;
+  margin-left: 10%;
+  width:30%;
+  background-color: var(--bg-accent5);
+  border-radius: 7px;
+  border: #00122b inset 2px;
+  box-shadow: 0 0 10px black;
+}
+
+.profileButtonText{
+  color:var(--text-color);
+}
+
+@keyframes klappeaus {
+  40%{transform: rotateX(-440deg);opacity: 1;}
+  70%{transform: rotateX(-320deg);opacity: 1}
+  100%{transform: rotateX(-360deg);opacity: 1}
+}
+
+@keyframes klappeein {
+  100%{transform: rotateX(-180deg);opacity: 0}
+}
+
+
+.profilePicChooser{
+  opacity: 0;
+  border-radius: 10px;
+  z-index: 12;
+  position: relative;
+  top:278px;
+  transform-origin: 0 0;
+  transform: rotateX(-180deg);
+  background-color: var(--bg-accent5);
+  color: var(--text-color);
+  padding: 2px;
+  text-align: center;
+  width:300px;
+  animation: klappeaus 1.5s linear forwards;
+}
+
+.profilePicChooser_2{
+  opacity: 1;
+  border-radius: 10px;
+  z-index: 12;
+  position: relative;
+  top:278px;
+  transform-origin: 0 0;
+  transform: rotateX(-360deg);
+  background-color: var(--bg-accent5);
+  color: var(--text-color);
+  padding: 2px;
+  text-align: center;
+  width:300px;
+  animation: klappeein 1s linear forwards;
+}
+
+.fileChooser{
+  color:var(--text-color);
+}
+
+@keyframes usergrButton {
+  50% {opacity: 0;}
+  100%{opacity: 1;}  
+}
+
+.usergrButtonWrapper{
+  padding: 20px;
+  margin-left: -2.2vw;
+  width: 20vw;
+  height: 1vh;
+  opacity: 0;
+  animation: usergrButton 1s 1s linear forwards;
+  margin-bottom: -15px;
+}
+
+.usergrButton{
+  margin: 5px;
+  font-size: 20pt;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  float: left;
+  margin-left: 24px;
+  text-align: center;
+  color:var(--text-color);
+  background-color: var(--bg-accent5);
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  font-weight: 900;
+}
+
+.usergrButtonActive{
+  font-weight: 900;
+  margin: 5px;
+  font-size: 20pt;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: var(--text-color) 2px solid;
+  box-shadow: 0 0 10px var(--text-color);
+  float: left;
+  margin-left: 24px;
+  text-align: center;
+  color:var(--text-color);
+  background-color: var(--bg-accent5);
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 }

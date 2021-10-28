@@ -9,10 +9,15 @@ import InformationModal from "./InformationModal"
 function MyHeader(props) {
   const [modal, setModal] = useState()
   const [message, setMessage] = useState("")
+  const [reload, setReload] = useState(false)
 
   function modalHandler() {
     setModal(false)
   }
+
+  useEffect(()=>{
+    console.log(reload);
+  },[reload])
 
   useEffect(async ()=>{
     if(modal===true){
@@ -40,7 +45,7 @@ function MyHeader(props) {
         <Route path="/speiseplan" render={() => <Title><a href="/">Speiseplan</a></Title>} />
         <Route path="/register" render={() => <Title><a href="/">Registrieren</a></Title>} />
       </Router>
-      <Navitem icon={<IoMdLogIn/>} nummer="1" modalHandler={setModal} messageHandler={setMessage}>Hallo</Navitem>
+      <Navitem icon={<IoMdLogIn/>} nummer="1" modalHandler={setModal} messageHandler={setMessage} reloadHandler={()=>setReload(!reload)}>Hallo</Navitem>
       <Navitem icon={<IoIosArrowDown/>} modalHandler={setModal} messageHandler={setMessage} nummer="2"></Navitem>
       {modal && <InformationModal open={modal} openHandler={modalHandler} text={message} />}
     </Navbar>

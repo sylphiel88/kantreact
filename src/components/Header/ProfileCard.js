@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { IoIosColorWand } from "react-icons/io";
+import { MdAlternateEmail } from "react-icons/md";
+import ProfilePicChooser from "./ProfilePicChooser"
 
 function ProfileCard(props) {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
     const [img, setImg] = useState(null)
     const [mouse, setMouse] = useState(false)
 
@@ -22,6 +24,10 @@ function ProfileCard(props) {
                 })
         }
     })
+
+    useEffect(()=> {
+        props.reloadHandler()
+    },[img])
 
     function mouseEHandler() {
         setMouse(true)
@@ -60,22 +66,31 @@ function ProfileCard(props) {
         return window.btoa(binary);
     };
 
+    function setOpenHandler(){
+        if(open){
+            document.getElementById("ppc").classList.replace("profilePicChooser","profilePicChooser_2")
+            setTimeout(()=>{setOpen(false)},1000)
+        } else {
+            setOpen(true)
+        }
+    }
+
     return (
-        <div className="profileCard">
-            {open && <div>
-                <div class="card" style={{ backgroundColor: "#3a5379", border: "none", color: "rgb(255, 251, 224)" }}>
-                    <div className="profileHeader"><img src={img} className="profileLogo" onMouseEnter={mouseEHandler} onMouseLeave={mouseLHandler} /><div>{mouse && <IoIosColorWand className="profileIcon" />}</div><div className="profileUserText"><span className="profileUsername">{props.user}</span><span className="profileUsergroup">{props.usergr}</span></div></div>
-                    <div class="card-section">
-                        <p>This is a simple card with an image.</p>
-                    </div>
-                    <label style={{ width: "100px", height: "30px", backgroundColor: "#FF0000" }} onClick={props.handler}>Schließen</label>
-                    <label style={{ width: "100px", height: "30px", backgroundColor: "#FF0000" }} onClick={props.logOutHandler}>LogOut</label>
-                    <input type="file" onChange={fileHandler} id="filename"></input>
+        <div style={{zIndex:"12"}}>
+            <div className="card profileCard">
+                <div className="profileHeader"><img src={img} alt="" className="profileLogo" onMouseEnter={mouseEHandler} onMouseLeave={mouseLHandler} onClick={setOpenHandler} /><div>{mouse && <IoIosColorWand className="profileIcon" />}</div><div className="profileUserText"><span className="profileUsername">{props.user}</span><span className="profileUsergroup">{props.usergr}</span></div></div>
+                <div className="card-section">
+                    <p><MdAlternateEmail className="emailIcon" />{props.userEmail}</p>
                 </div>
-            </div>}
+                <div className="profileButtonWrapper">
+                    <label className="profileButton" onClick={props.handler}><span className="profileButtonText">Schließen</span></label>
+                    <label className="profileButton" onClick={props.logOutHandler}><span className="profileButtonText">LogOut</span></label>
+                </div>
+                {/* <input type="file" onChange={fileHandler} id="filename"></input> */}
+            </div>
+            {open && <ProfilePicChooser setImg={setImg} setOpen={setOpen} user={props.user}/>}
         </div>
     )
 }
 
 export default ProfileCard
-
