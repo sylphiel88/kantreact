@@ -1,7 +1,7 @@
-import { IoMdEye, IoMdEyeOff } from 'react-icons/io'
 import React, { useEffect, useState } from "react"
-import { IoIosArrowRoundForward, IoIosCheckmark } from "react-icons/io"
-import ReactTooltip from 'react-tooltip'
+import LoginFeld from './Login/LoginFeld'
+import SignInFeld from "./Login/SignInFeld"
+import SignUpFeld from "./Login/SignUpFeld"
 
 function Login(props) {
     const [open, setOpen] = useState(true)
@@ -21,12 +21,12 @@ function Login(props) {
     const [gotDeps, setGotDeps] = useState(false)
     const [deps, setDeps] = useState({})
 
-    useEffect(async ()=>{
-        if(!gotDeps){
-            var array=[]
-            await fetch('http://localhost:5000/api/v1/class/getAllDepartments',{method:"GET",headers:{"Content-Type":"application/json"}})
-            .then(response => response.json())
-            .then(data => setDeps({data}))
+    useEffect(async () => {
+        if (!gotDeps) {
+            var array = []
+            await fetch('http://localhost:5000/api/v1/class/getAllDepartments', { method: "GET", headers: { "Content-Type": "application/json" } })
+                .then(response => response.json())
+                .then(data => setDeps(data.deps))
             setGotDeps(true)
         }
     })
@@ -184,24 +184,24 @@ function Login(props) {
         }
     }
 
-    function nextGroup(){
-        if(usergr=="adm"){
+    function nextGroup() {
+        if (usergr == "adm") {
             setUsergr("par")
-        } else if(usergr=="par"){
+        } else if (usergr == "par") {
             setUsergr("doz")
-        } else if(usergr=="doz"){
+        } else if (usergr == "doz") {
             setUsergr("coo")
         } else {
             setUsergr("adm")
         }
     }
 
-    function backGroup(){
-        if(usergr=="adm"){
+    function backGroup() {
+        if (usergr == "adm") {
             setUsergr("coo")
-        } else if(usergr=="par"){
+        } else if (usergr == "par") {
             setUsergr("adm")
-        } else if(usergr=="doz"){
+        } else if (usergr == "doz") {
             setUsergr("par")
         } else {
             setUsergr("doz")
@@ -225,48 +225,41 @@ function Login(props) {
 
     if (open) {
         return (
-            <div className={!signInloaded ? "login-feld-signin" : signUp ? "login-feld-signup" : "login-feld-signin-2"} id="login-feld">
-                <div className={signUp ? "absolutf" : "absolutf2"}>
-                    <label for='username' style={{ color: "#f0f0f0" }}>Nutzername: </label>
-                    <input id='username' type="text" className="inputl" onChange={(event) => setUnHandler(event.target.value)} value={username}></input>
-                </div>
-                <br /><br /><br />
-                {signUp &&
-                    <div>
-                        <div><div className={signUp ? "absolutf" : "absolutf2"}><label for='email' style={{ color: "#f0f0f0" }}>Email: </label><div data-tip data-class="tt" data-for="email-tooltip"><input id='email' type="text" className={emailtest ? "inputl pwt" : "inputl pwt2"} onChange={(event) => setEmHandler(event.target.value)}></input></div></div><br /><br /><br /></div>
-                    </div>
+            <LoginFeld signInloaded={signInloaded} signUp={signUp}>
+                {!signUp?
+                    <SignInFeld username={username}
+                                password={password}
+                                eye={eye}
+                                passwordtest={passwordtest}
+                                setUnHandler={setUnHandler}
+                                setEyeHandler={setEyeHandler}
+                                setPwHandler={setPwHandler}
+                                signInHandler={signInHandler}
+                                signUpHandler={signUpHandler}
+                    />
+                :
+                    <SignUpFeld username={username}
+                                password={password}
+                                passwordc={passwordc}
+                                eye={eye}
+                                eye2={eye2}
+                                usergr={usergr}
+                                passwordtest={passwordtest}
+                                setUnHandler={setUnHandler}
+                                setEyeHandler={setEyeHandler}
+                                setPwHandler={setPwHandler}
+                                signInHandler={signInHandler}
+                                signUpHandler={signUpHandler}
+                                setEye2Handler={setEye2Handler}
+                                setUsergr={setUsergr}
+                                setPw2Handler={setPw2Handler}
+                                wheelHandler={wheelHandler}
+                                setEmHandler={setEmHandler}
+                    />
                 }
-                {signUp && emailtest && <ReactTooltip id="email-tooltip" >Keine Valide Email!</ReactTooltip>}
-                <div className={signUp ? "absolutf" : "absolutf2"}>
-                    <label for='password' style={{ color: "#f0f0f0" }}>Passwort: </label>
-                    {!eye ? <div className="input-group "><input data-tip data-class="tt1" data-for="pass-tooltip" id='password' type="password" className={signUp ? (passwordtest ? "input-group-field inputl pwt" : "input-group-field inputl pwt2") : "input-group-field inputl"} onChange={setPwHandler}></input><div className="input-group-label eyediv" value={password}><IoMdEye className="eye" onClick={setEyeHandler} /></div></div> : <div className="input-group"><input id='password' data-tip data-class="tt1" data-for="pass-tooltip" type="text" className="input-group-field inputl" onChange={setPwHandler}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={setEyeHandler} value={password} /></div></div>}
-                    {signUp && passwordtest && <ReactTooltip id="pass-tooltip" >Passwörter müssen verdichtet sein!</ReactTooltip>}
-                </div>
-                <br /><br /><br />
-                {signUp && (!eye2 ? <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen: </label><div className="input-group "><input id='password2' type="password" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEye className="eye" onClick={() => setEye2Handler()} /></div></div></div> : <div className={signUp ? "absolutf" : "absolutf2"}><label for='password2' style={{ color: "#f0f0f0" }}>Passwort bestätigen:</label><div className="input-group"><input id='password2' type="text" className="input-group-field inputl" onChange={(event) => setPw2Handler(event.target.value)}></input><div className="input-group-label eyediv"><IoMdEyeOff className="eye" onClick={() => setEye2Handler()} /></div></div></div>)}
-                {signUp && <div><br /><br /><br /></div>}
-                {signUp &&
-                    <div className="usergrButtonWrapper" onWheel={e=>wheelHandler(e)}>
-                        <label className={usergr == "adm" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("adm")} title="Administrator">A</label>
-                        <label className={usergr == "par" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("par")} title="Schüler">S</label>
-                        <label className={usergr == "doz" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("doz")} title="Dozent">D</label>
-                        <label className={usergr == "coo" ? "usergrButtonActive" : "usergrButton"} onClick={() => setUsergr("coo")} title="Küche">K</label>
-                    </div>
-                }
-                {signUp && <div><br /><br/></div>}
-                <div className={signUp ? "absolutf" : "absolutf2"}>
-                    <div className="input-group">
-                        {!signUp && <label id='signin' className="input-group-label inputb" onClick={signInHandler}><a href="#"><IoIosCheckmark className="buttonicon" /></a>Sign In</label>}
-                        {!signUp && <label id='signup' className="input-group-label inputb2" onClick={signUpHandler}><IoIosArrowRoundForward className="buttonicon2" />Sign Up</label>}
-                        {signUp && <label id='signin' className="input-group-label inputb2" onClick={signInHandler}><a href="#"><IoIosArrowRoundForward className="buttonicon2" /></a>Zurück</label>}
-                        {signUp && <label id='signup' className="input-group-label inputb" onClick={signUpHandler}><IoIosCheckmark className="buttonicon" />Sign Up</label>}
-                    </div>
-                </div>
-            </div>
+            </LoginFeld>
         )
     } else {
-        // document.getElementById("app").className = "app"
-        // document.getElementById("footer").className = ""
         return null
     }
 }

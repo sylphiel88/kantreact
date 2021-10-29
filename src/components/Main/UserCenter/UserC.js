@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import UserList from "./UserList"
+import PerPageSelector from "./PerPageSelector"
+import PaginatorUser from "./PaginatorUser"
+import SearchField from "./SearchField"
+import CheckBoxWrapper from "./CheckBoxWrapper"
+import ActivateCheckbox from "./ActivateCheckbox"
+import DeleteCheckbox from "./DeleteCheckbox"
+import SendButton from "./SendButton"
 
 const UserC = props => {
 
@@ -110,30 +117,18 @@ const UserC = props => {
         <div className={props.close && "flex-center-div"} onWheel={(e) => wheelHandler(e)}>
             {props.close && "User-Kontrollzentrum"}
             {!props.close &&
-                <select onChange={chgSelectHandler} id="selector" className="selector">
-                    <option value="4">4 Nutzer pro Seite</option>
-                    <option value="9">9 Nutzer pro Seite</option>
-                    <option value="12" selected="selected">12 Nutzer pro Seite</option>
-                    <option value="16">16 Nutzer pro Seite</option>
-                    <option value="20">20 Nutzer Pro Seite</option>
-                </select>}
-
-            {!props.close && <div className="userlist"><UserList data={data} page={page} perPage={numPer} send={send} setSendHandler={setSendHandler} /></div>}
-            {pages > 1 && !props.close && page > 1 && <input type="button" className="pagesBackw" id="us" value="<" onClick={page === 1 ? null : backButton}></input>}
-            {pages > 1 && !props.close && <label className="pages" id="us">{page + " / " + pages}</label>}
-            {pages > 1 && !props.close && page < pages && <input type="button" className="pagesForw" id="us" value=">" onClick={page === pages ? null : nextButton}></input>}
-            {!props.close && <input type="text" onChange={searchChange} id="searchUsers" value={search} className="searchUser" ></input>}
-            {!props.close && <label htmlFor="searchUsers" class="searchUserL">Search Users</label>}
-            {!props.close && <input type="button" className="userSend" id="us" value="Absenden" onClick={setSendHandler}></input>}
-            {!props.close &&
-                <div className="flex-center-div">
-                    <div className="allUsersTA">Alle Nutzer auf dieser Seite aktivieren
-                        <input type="checkbox" className="allUsersChkbA" id="allUsersA" onChange={checkAllUsersA}></input>
-                    </div>
-                    <br />
-                    <div className="allUsersTD">Alle Nutzer auf dieser Seite entfernen
-                        <input type="checkbox" className="allUsersChkbD" id="allUsersD" onChange={checkAllUsersD}></input>
-                    </div>
+                <div>
+                    <PerPageSelector chgSelectHandler={chgSelectHandler} />
+                    {pages > 1 &&
+                        <PaginatorUser page={page} pages={pages} backButton={backButton} nextButton={nextButton} />}
+                    <SearchField search={search} searchChange={searchChange} />
+                    <div className="userlist"><UserList data={data} page={page} perPage={numPer} send={send} setSendHandler={setSendHandler} /></div>
+                    <CheckBoxWrapper>
+                        <ActivateCheckbox checkAllUsersA={checkAllUsersA}/>
+                        <br />
+                        <DeleteCheckbox checkAllUsersD={checkAllUsersD}/>
+                    </CheckBoxWrapper>
+                    <SendButton setSendHandler={setSendHandler}/>
                 </div>}
         </div>
     )

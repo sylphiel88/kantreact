@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import UserCard from './UserCard';
-import InformationModal from '../InformationModal';
+import InformationModal from '../../InformationModal';
 function UserList(props) {
     const [datar, dataChg] = useState(props.data)
     const [cardList, setCardList] = useState([])

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react"
 import moment from "moment"
 import 'moment/locale/de'
 import axios from "axios"
+import SpeiseWrapper from "./SpeiseWrapper"
+import PaginatorMeal from "./PaginatorMeal"
+import VollkostCard from "./VollkostCard"
+import VegiCard from "./VegiCard"
 
 function SpeiseList(props) {
 
@@ -70,11 +74,8 @@ function SpeiseList(props) {
         }
     }
 
-    const changeVK = (event) => {
-        if (event.key === 'Enter') {
-            console.log("jop");
-            setVollkost(document.getElementById("changeVK").value)
-        }
+    async function changeVK() {
+        setVollkost(document.getElementById("changeVK").value)
     }
 
     async function changeSoupVK() {
@@ -94,38 +95,11 @@ function SpeiseList(props) {
     }
 
     return (
-        <div onWheel={(e) => wheelHandler(e)} style={{ width: "80vw", height: "70vh" }}>
-            <div className="tagSpeisePlan">
-                <input type="button" className="daysBackw" id="us" value="<" onClick={backday}></input>{wochentag}
-                <input type="button" className="daysForw" id="us" value=">" onClick={nextday}></input>
-            </div>
-            <div className="card cardVK speisePlanPanelVK">
-                <div className="card-divider dateSpVK">
-                    {date}
-                </div>
-                <div className="card-section">
-                    <textarea id="changeVK" type="text" className="chgMealVK" rows="2" value={vollkost} onKeyDown={changeVK}></textarea>
-                    <p className="soupStyle">
-                        <span style={{ float: "left" }}>Suppe: </span><input id="changeSVK" type="text" className="chgSVK" value={suppeVk} onChange={changeSoupVK}></input>
-                        <br />
-                        <span style={{ float: "left" }}>Dessert: </span><input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>
-                    </p>
-                </div>
-            </div>
-            <div className="card cardVG speisePlanPanelVG">
-                <div className="card-divider dateSpVG">
-                    <span class="spText">{date}</span>
-                </div>
-                <div className="card-section">
-                    <textarea id="changeVG" type="text" className="chgMealVG" rows="2" value={vegetarisch} onChange={changeVegetarisch}></textarea>
-                    <div className="soupStyle">
-                        <span style={{ float: "left" }}>Suppe: </span><input id="changeSVG" type="text" className="chgSVG" value={suppeVg} onChange={changeSoupVG}></input>
-                        <br />
-                        <span style={{ float: "left" }}>Dessert: </span><input id="changeDessert" type="text" className="chgD" value={dessert} onChange={changeDessert}></input>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <SpeiseWrapper wheelHandler={wheelHandler}>
+            <PaginatorMeal backday={backday} nextday={nextday} wochentag={wochentag} />
+            <VollkostCard date={date} vollkost={vollkost} changeVK={changeVK} suppeVk={suppeVk} changeSoupVK={changeSoupVK} dessert={dessert} changeDessert={changeDessert} />
+            <VegiCard date={date} vegetarisch={vegetarisch} changeVegetarisch={changeVegetarisch} suppeVg={suppeVg} changeSoupVG={changeSoupVG} dessert={dessert} changeDessert={changeDessert} />
+        </SpeiseWrapper>
     )
 }
 

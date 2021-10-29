@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import SpeiseplanService from "../../services/speiseplan"
+import SpeiseplanService from "../../../services/speiseplan"
 import SpeiseList from "./SpeiseList"
 
 function SpeiseplanPanel(props) {

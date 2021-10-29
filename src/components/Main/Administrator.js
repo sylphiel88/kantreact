@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import SpeiseplanPanel from "./SpeiseplanPanel"
-import UserC from "./UserC"
+import SpeiseplanPanel from "./MealCenter/SpeiseplanPanel"
+import UserC from "./UserCenter/UserC"
 
 function Administrator({ props }) {
     const [curPage, setCurPage] = useState(0)

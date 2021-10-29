@@ -478,6 +478,10 @@ li{
 
 
 .inputb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  float:left;
   border-radius: 20px !important;
   text-align: center;
   background-color: var(--bg-accent);
@@ -495,6 +499,10 @@ li{
 }
 
 .inputb2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  float:left;
   border-radius: 20px !important;
   text-align: center;
   background-color: #a3c0eb;
@@ -517,7 +525,7 @@ li{
 }
 
 .buttonicon2 {
-  width: 25px;
+  width: 40px;
   height: 40px;
 }
 
@@ -1148,9 +1156,9 @@ li{
 
 .userSend {
   box-shadow: 0 0 25px black;
-  position: relative;
-  bottom: 5%;
-  left: -1.3%;
+  position: fixed;
+  top: 770px;
+  left: 900px;
   color: var(--text-color);
   background-color: var(--bg-accent);
   border-radius: 15px;
@@ -1755,11 +1763,11 @@ li{
   height: 1vh;
   opacity: 0;
   animation: usergrButton 1s 1s linear forwards;
-  margin-bottom: -15px;
+  margin-bottom: -40px;
 }
 
 .usergrButton{
-  margin: 5px;
+  margin: 3px;
   font-size: 20pt;
   display: flex;
   flex-direction: column;
