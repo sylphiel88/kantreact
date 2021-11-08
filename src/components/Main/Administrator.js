@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import SpeiseplanPanel from "./MealCenter/SpeiseplanPanel"
 import UserC from "./UserCenter/UserC"
+import DocentEditor from "./DocentEditor/DocentEditor"
 
 function Administrator({ props }) {
     const [curPage, setCurPage] = useState(0)
@@ -31,7 +32,7 @@ function Administrator({ props }) {
             <div className="zeile" style={{ marginTop: "5vh" }}>
                 <div id="s1" className={curPage === 1 ? "spalte1 spalte_anim" : "spalte1"} onClick={() => setCurPage(1)}><div className="spalte1Img"></div>{curPage===1?<UserC close={closingState}/>:"User-Kontrollzentrum"}</div>
                 <div id="s2" className={curPage === 2 ? "spalte2 spalte_anim" : "spalte2"} onClick={() => setCurPage(2)}>{curPage===2?<SpeiseplanPanel close={closingState}/>:"Speiseplan"}<div className="spalte2Img"></div></div>
-                <div id="s3" className={curPage === 3 ? "spalte3 spalte_anim" : "spalte3"} onClick={() => setCurPage(3)}>c</div>
+                <div id="s3" className={curPage === 3 ? "spalte3 spalte_anim" : "spalte3"} onClick={() => setCurPage(3)}>{curPage===3?<DocentEditor close={closingState}/>:"Dozenten"}<div className="spalte3Img"></div></div>
             </div>
             <div className="zeile">
                 <div id="s4" className={curPage === 4 ? "spalte4 spalte_anim" : "spalte4"} onClick={() => setCurPage(4)}>d</div>

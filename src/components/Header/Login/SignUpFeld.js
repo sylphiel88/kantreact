@@ -8,6 +8,7 @@ import UserGroupButton from "./UserGroupButton"
 import LoginButtonWrapper from "./LoginButtonWrapper"
 import SignInButton from "./SignInButton"
 import SignUpButton from "./SignUpButton"
+import DepSelector from "./DepSelector"
 
 function SignUpFeld(props) {
     return (
@@ -25,7 +26,8 @@ function SignUpFeld(props) {
                 <UserGroupButton usergr={props.usergr} grpS="doz" grpL="Dozent" grpB="D" setUsergr={props.setUsergr} />
                 <UserGroupButton usergr={props.usergr} grpS="coo" grpL="Küche" grpB="K" setUsergr={props.setUsergr} />
             </UserGroupButtonWrapper>
-            <EmptyLine />
+            <EmptyLine/>
+            {props.usergr=="doz"?<div><br/><DepSelector signUp={true} deps={props.deps} changeHandler={props.depSelHandler}/><EmptyLine/></div>:<div><EmptyLine/><br/></div>}
             <LoginButtonWrapper signUp={true}>
                 <SignInButton signUp={true} signInHandler={props.signInHandler} />
                 <SignUpButton signUp={true} signUpHandler={props.signUpHandler} />

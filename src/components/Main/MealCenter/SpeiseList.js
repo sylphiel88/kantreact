@@ -20,6 +20,7 @@ function SpeiseList(props) {
     const [date, setDate] = useState("")
     const [upDate, setUpDate] = useState()
     const [wochentag, setWochentag] = useState("Montag")
+    const [post, setPost] = useState(false)
 
     useEffect(() => {
         if (open != props.openstate) {
@@ -50,16 +51,23 @@ function SpeiseList(props) {
     }, [day])
 
     useEffect(async () => {
-        await axios.post("http://localhost:5000/api/v1/menu/update", { date: upDate, vk: vollkost, vg: vegetarisch, svk: suppeVk, svg: suppeVg, dessert: dessert })
-            .then(setTimeout(() => { props.updateHandler() }, 500));
-    }, [vollkost, dessert, suppeVk, vegetarisch, suppeVg])
+        
+        if (post === true) {
+            console.log(post,vollkost);
+            await axios.post("http://localhost:5000/api/v1/menu/update", { date: upDate, vk: vollkost, vg: vegetarisch, svk: suppeVk, svg: suppeVg, dessert: dessert })
+            .then(setPost(false))
+            .then(props.updateHandler())    
+        }
+    }, [post])
 
     function wheelHandler(e) {
         if (e.deltaY === 100) {
             nextday()
+            setTimeout(props.updateHandler(),500)
         }
         if (e.deltaY === -100) {
             backday()
+            setTimeout(props.updateHandler(),500)
         }
     }
     function backday() {
@@ -76,22 +84,27 @@ function SpeiseList(props) {
 
     async function changeVK() {
         setVollkost(document.getElementById("changeVK").value)
+        setPost(true)
     }
 
     async function changeSoupVK() {
         setSuppeVk(document.getElementById("changeSVK").value)
+        setPost(true)
     }
 
     async function changeSoupVG() {
         setSuppeVg(document.getElementById("changeSVG").value)
+        setPost(true)
     }
 
     async function changeVegetarisch() {
         setVegetarisch(document.getElementById("changeVG").value)
+        setPost(true)
     }
 
     async function changeDessert() {
         setDessert(document.getElementById("changeDessert").value)
+        setPost(true)
     }
 
     return (

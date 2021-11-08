@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react"
-import SpeiseplanService from "../../../services/speiseplan"
+import axios from "axios"
 import SpeiseList from "./SpeiseList"
 
 function SpeiseplanPanel(props) {
 
     const [open, setOpen] = useState(false)
     const [speisen, setSpeisen] = useState(false)
-    const [update, setUpdate] = useState(false)
 
     useEffect(() => {
         if (open != true) {
@@ -19,26 +18,21 @@ function SpeiseplanPanel(props) {
     })
 
     useEffect(async () => {
-        console.log(open)
-        if (open === true) {
-            await SpeiseplanService.getAll()
+        if (open === true || speisen===false) {
+            await axios.get("http://localhost:5000/api/v1/menu",{header:{ContentType: "application/json"}})
                 .then(
-                    response => setSpeisen(response.data)
-                )
+                    response => setSpeisen(response.data))
         }
-        if(update===true){
-            setUpdate(false)
-        }
-    }, [open, update])
-
-    function setUpdateHandler(){
-        setUpdate(true)
+    }, [open, speisen])
+    
+    function setUpdate(){
+        setSpeisen(false)
     }
 
     return (
         <div>
             {props.close && "Speiseplan"}
-            {!props.close && <SpeiseList speisen={speisen} openState={open} updateHandler={setUpdateHandler} />}
+            {!props.close && <SpeiseList speisen={speisen} openState={open} updateHandler={setUpdate}/>}
         </div>
     )
 }

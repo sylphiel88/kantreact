@@ -1,3 +1,4 @@
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import LoginFeld from './Login/LoginFeld'
 import SignInFeld from "./Login/SignInFeld"
@@ -19,14 +20,13 @@ function Login(props) {
     const [token, setToken] = useState("")
     const [usergr, setUsergr] = useState("adm")
     const [gotDeps, setGotDeps] = useState(false)
-    const [deps, setDeps] = useState({})
+    const [deps, setDeps] = useState([])
+    const [dep, setDep] = useState("Fachinformatik")
 
-    useEffect(async () => {
-        if (!gotDeps) {
-            var array = []
-            await fetch('http://localhost:5000/api/v1/class/getAllDepartments', { method: "GET", headers: { "Content-Type": "application/json" } })
-                .then(response => response.json())
-                .then(data => setDeps(data.deps))
+    useEffect(async ()=>{
+        if(!gotDeps){
+            await axios.get("http://localhost:5000/api/v1/class/getAllDepartments",{header:{ContentType: "application/json"}})
+            .then(res => setDeps(res.data.deps))
             setGotDeps(true)
         }
     })
@@ -135,7 +135,8 @@ function Login(props) {
                         username: username,
                         password: password,
                         email: email,
-                        usergr: usergr
+                        usergr: usergr,
+                        dep: dep
                     })
                 };
                 await fetch('http://localhost:5000/api/v1/user/signup', requestOptions)
@@ -217,6 +218,11 @@ function Login(props) {
         }
     }
 
+    
+    async function depSelHandler() {
+        setDep(document.getElementById('depSelector').value)
+    }
+
     useEffect(() => {
         if (open != props.stateo) {
             setOpen(props.stateo)
@@ -255,6 +261,8 @@ function Login(props) {
                                 setPw2Handler={setPw2Handler}
                                 wheelHandler={wheelHandler}
                                 setEmHandler={setEmHandler}
+                                deps={deps}
+                                depSelHandler={depSelHandler}
                     />
                 }
             </LoginFeld>
