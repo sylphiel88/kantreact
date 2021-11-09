@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import DocentPanelWrapper from "./DocentPanelWrapper.js";
-import DocentDepsSelector from "./DocentDepsSelector";
+import DocentDocsSelector from "./DocentDocsSelector";
 
 function DocentPanel(props){
     return(
         <div>
             <DocentPanelWrapper>
-                <DocentDepsSelector/>
+                <DocentDocsSelector/>
             </DocentPanelWrapper>
         </div>
     )

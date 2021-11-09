@@ -1016,6 +1016,35 @@ li{
   margin-bottom: -10px;
 }
 
+.carduser3 {
+  box-shadow: 0 0 25px black;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25vw;
+  height: 10vh;
+  float: left;
+  opacity: 0;
+  background-color: var(--bg-accent);
+  color: var(--text-color);
+  animation-name: closebut;
+  animation-timing-function: linear;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  border: none;
+  font-size: 20pt;
+}
+
+.cardGreen{
+  background-color: green;
+}
+
+.cardRed{
+  background-color: var(--bg-accent);
+}
+
 .carduser4 {
   box-shadow: 0 0 25px black;
   margin: 5px;
@@ -1814,4 +1843,17 @@ li{
   width: 50px;
   height: 50px;
   border-radius: 25px;
+}
+
+.docentPanelWrapper{
+  margin: 0;
+  height: 80vh; 
+  width:78vw; 
+}
+
+.classDepCreator{
+  display: block;
+  height: 45%;
+  width: 100%;
+  min-width: 100%;
 }

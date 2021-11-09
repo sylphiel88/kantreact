@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import SpeiseplanPanel from "./MealCenter/SpeiseplanPanel"
 import UserC from "./UserCenter/UserC"
 import DocentEditor from "./DocentEditor/DocentEditor"
+import ClassDepCenter from "./ClassDepCenter/ClassDepCenter"
 
 function Administrator({ props }) {
     const [curPage, setCurPage] = useState(0)
@@ -35,7 +36,7 @@ function Administrator({ props }) {
                 <div id="s3" className={curPage === 3 ? "spalte3 spalte_anim" : "spalte3"} onClick={() => setCurPage(3)}>{curPage===3?<DocentEditor close={closingState}/>:"Dozenten"}<div className="spalte3Img"></div></div>
             </div>
             <div className="zeile">
-                <div id="s4" className={curPage === 4 ? "spalte4 spalte_anim" : "spalte4"} onClick={() => setCurPage(4)}>d</div>
+                <div id="s4" className={curPage === 4 ? "spalte4 spalte_anim" : "spalte4"} onClick={() => setCurPage(4)}>{curPage===4?<ClassDepCenter close={closingState}/>:"Klassen / Abteilungen"}<div className="spalte2Img"></div></div>
                 <div id="s5" className={curPage === 5 ? "spalte5 spalte_anim" : "spalte5"} onClick={() => setCurPage(5)}>e</div>
                 <div id="s6" className={curPage === 6 ? "spalte6 spalte_anim" : "spalte6"} onClick={() => setCurPage(6)}>f</div>
             </div>

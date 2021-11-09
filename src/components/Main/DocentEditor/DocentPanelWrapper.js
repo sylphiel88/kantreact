@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 
 function DocentPanelWrapper(props){
     return(
-        <div>
+        <div className="docentPanelWrapper">
             {props.children}
         </div>
     )
