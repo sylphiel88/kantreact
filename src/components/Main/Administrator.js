@@ -5,6 +5,7 @@ import DocentEditor from "./DocentEditor/DocentEditor"
 import ClassDepCenter from "./ClassDepCenter/ClassDepCenter"
 
 function Administrator({ props }) {
+    
     const [curPage, setCurPage] = useState(0)
     const [closingState, setClosingState] = useState(false)
 
