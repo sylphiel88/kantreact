@@ -15,7 +15,7 @@ function DepartmentCreator(props) {
 
     useEffect(async()=>{
         if(!open){
-            await axios.get('http://localhost:5000/api/v1/class/getAllDepartments',{header:{ContentType:"application/json"}})
+            await axios.get('http://localhost:5000/api/v1/class/getAllDepartmentsX',{header:{ContentType:"application/json"}})
             .then(res => setAllDepsL(res.data.deps))
             await axios.get('http://localhost:5000/api/v1/class/getAllDepartmentsS',{header:{ContentType:"application/json"}})
             .then(res => setAllDepsS(res.data.deps))
@@ -25,7 +25,7 @@ function DepartmentCreator(props) {
 
     useEffect(async()=>{
         if(!open){
-            await axios.get('http://localhost:5000/api/v1/class/getAllDepartments',{header:{ContentType:"application/json"}})
+            await axios.get('http://localhost:5000/api/v1/class/getAllDepartmentsX',{header:{ContentType:"application/json"}})
             .then(res => setAllDepsL(res.data.deps))
             await axios.get('http://localhost:5000/api/v1/class/getAllDepartmentsS',{header:{ContentType:"application/json"}})
             .then(res => setAllDepsS(res.data.deps))

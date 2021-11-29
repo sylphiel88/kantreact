@@ -3,6 +3,8 @@ import SpeiseplanPanel from "./MealCenter/SpeiseplanPanel"
 import UserC from "./UserCenter/UserC"
 import DocentEditor from "./DocentEditor/DocentEditor"
 import ClassDepCenter from "./ClassDepCenter/ClassDepCenter"
+import MealReport from "./MealReportCenter/MealReport"
+import ReportMeal from "./ReportMealCenter/ReportMeal"
 
 function Administrator({ props }) {
     
@@ -38,8 +40,8 @@ function Administrator({ props }) {
             </div>
             <div className="zeile">
                 <div id="s4" className={curPage === 4 ? "spalte4 spalte_anim" : "spalte4"} onClick={() => setCurPage(4)}>{curPage===4?<ClassDepCenter close={closingState}/>:"Klassen / Abteilungen"}<div className="spalte2Img"></div></div>
-                <div id="s5" className={curPage === 5 ? "spalte5 spalte_anim" : "spalte5"} onClick={() => setCurPage(5)}>e</div>
-                <div id="s6" className={curPage === 6 ? "spalte6 spalte_anim" : "spalte6"} onClick={() => setCurPage(6)}>f</div>
+                <div id="s5" className={curPage === 5 ? "spalte5 spalte_anim" : "spalte5"} onClick={() => setCurPage(5)}>{curPage===5?<ReportMeal close={closingState}/>:"Essen Melden"}<div className="spalte2Img"></div></div>
+                <div id="s6" className={curPage === 6 ? "spalte6 spalte_anim" : "spalte6"} onClick={() => setCurPage(6)}>{curPage===6?<MealReport close={closingState}/>:"Gemeldete Essen"}<div className="spalte2Img"></div></div>
             </div>
             {curPage != 0 && !closingState ? <div class="close" onClick={() => closeHandler()}>X</div> : ""}
         </div>

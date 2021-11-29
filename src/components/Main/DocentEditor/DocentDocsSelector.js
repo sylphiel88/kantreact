@@ -2,6 +2,8 @@ import { ListItemSecondaryAction } from "@mui/material";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import DepList from "./DepList";
+import BackArrow from "./BackArrow"
+import NextArrow from "./NextArrow"
 
 function DocentDocsSelector(props) {
 
@@ -13,8 +15,12 @@ function DocentDocsSelector(props) {
     const [idchg, setIdchg] = useState(true)
     const [clsDep, setClsDep] = useState([])
     const [clsDoc, setClsDoc] = useState([])
-    const [items, setItems] = useState([])
     const [clsIds, setClsIds] = useState([])
+    const [classPage, setClassPage] = useState(1)
+    const [depsPage, setDepsPage] = useState(1)
+    const [classPages, setClassPages] = useState(1)
+    const [depsPages, setDepsPages] = useState(1)
+
 
     useEffect(() => {
         if (open != true) {
@@ -46,9 +52,12 @@ function DocentDocsSelector(props) {
     }, [id])
 
     useEffect(async () => {
-        await axios.get("http://localhost:5000/api/v1/class/getAllDepartments", { header: { ContentType: "application/json" } })
-            .then(res => setAllDeps(res.data.deps))
-    }, [docs])
+        await axios.post("http://localhost:5000/api/v1/class/getAllDepartments",{page:depsPage}, { header: { ContentType: "application/json" } })
+            .then(res => {
+                setAllDeps(res.data.deps)
+                setDepsPages(res.data.pages)
+            })
+    }, [docs, depsPage])
 
     useEffect(async () => {
         await axios.get("http://localhost:5000/api/v1/class/getDocents", { header: { ContentType: "application/json" } })
@@ -56,23 +65,40 @@ function DocentDocsSelector(props) {
     }, [open])
 
     useEffect(async () => {
+        console.log(classPage);
         if(idchg==true){
         await axios.post(
             "http://localhost:5000/api/v1/class/getDepsClasses",
-            { deps: docDeps },
+            { deps: docDeps, page: classPage },
             { header: { ContentType: "application/json" } }
         ).then(res => {
+            setClassPages(res.data.pages)
             setClsDep(res.data.classes)
             setClsIds(res.data.ids)
         })}
     }, [idchg])
 
     useEffect(async () => {
+        console.log(classPage);
         await axios.post(
             "http://localhost:5000/api/v1/class/getDepsClasses",
-            { deps: docDeps },
+            { deps: docDeps, page: classPage },
             { header: { ContentType: "application/json" } }
         ).then(res => {
+            setClsDep(res.data.classes)
+            setClsIds(res.data.ids)
+        })
+    }, [classPage])
+
+
+    useEffect(async () => {
+        await axios.post(
+            "http://localhost:5000/api/v1/class/getDepsClasses",
+            { deps: docDeps, page: 1 },
+            { header: { ContentType: "application/json" } }
+        ).then(res => {
+            console.log(res.data);
+            setClassPages(res.data.pages)
             setClsDep(res.data.classes)
             setClsIds(res.data.ids)
         })
@@ -161,15 +187,44 @@ function DocentDocsSelector(props) {
         setIdchg(true)
     }
 
+    function depsBackArrow(){
+        if(depsPage>1){
+            setDepsPage(depsPage-1)
+        }
+    }
+
+    function depsNextArrow(){
+        if(depsPage<depsPages){
+            setDepsPage(depsPage+1)
+        }
+    }
+
+    function classBackArrow(){
+        if(classPage>1){
+            setClassPage(classPage-1)
+        }
+    }
+
+    function classNextArrow(){
+        if(classPage<classPages){
+            setClassPage(classPage+1)
+        }
+    }
+
+
     return (
         <div>
             {docs && <select id="docsSelector" onChange={changeHandler}>
                 {docs.map((currElement, index) => makeItem(currElement, index))}
             </select>}
-            <p>Abteilungen</p>
-            {docDeps && allDeps.map(makeCard)}
-            <p>Klassen</p>
-            {(typeof (clsDep)!="undefined" && typeof (clsDoc)!="undefined")?clsDep.map(makeClass):null}
+            <div className="titleDepClass">{depsPage>1&&depsPages>1&&<div className="arrow"><BackArrow handler={depsBackArrow}/></div>}Abteilungen{depsPage<depsPages&&depsPages>1&&<div className="nextArrow"><NextArrow handler={depsNextArrow}/></div>}</div>
+            <div className="depsCards">
+                {docDeps && allDeps.map(makeCard)}
+            </div>
+            <p><span>{classPage>1&&classPages>1&&<BackArrow handler={classBackArrow}/>}Klassen{classPage<classPages&&classPages>1&&<NextArrow handler={classNextArrow}/>}</span></p>
+            <div className="depsCards">
+                {(typeof (clsDep)!="undefined" && typeof (clsDoc)!="undefined")?clsDep.map(makeClass):null}
+            </div>
         </div>
     )
 }

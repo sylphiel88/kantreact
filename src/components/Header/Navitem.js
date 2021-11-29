@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Dropdown from "./Dropdown"
 import Login from "./Login"
-import { IoLogoAngular, IoPersonOutline } from "react-icons/io5";
 import axios from 'axios'
 import ProfileCard from "./ProfileCard";
 
@@ -68,7 +67,6 @@ export default class Navitem extends Component {
         this.setState({
             open: !this.state.open
         })
-        console.log(this.state.open, this.state.dropdown, this.state);
     }
 
     loggedHandler(bool) {
